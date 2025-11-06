@@ -20,6 +20,9 @@ model Restaurant {
   slug      String
   avatarImageUrl String
   coverImageUrl String
+  menuCategories MenuCategory[]
+  products  Product[]
+  orders   Order[]
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
@@ -27,8 +30,60 @@ model Restaurant {
 model MenuCategory {
   id       String      @id @default(uuid())
   name      String
+  products  Product[]
   restaurant Restaurant @relation(fields: [restaurant], references: [id])
   restaurantId      String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+}
+
+model Product {
+  id       String      @id @default(uuid())
+  name      String
+  description String
+  imageUrl String
+  price    Float
+  ingredients String[]
+  orderProducts OrderProduct[]
+  restaurantId String
+  restaurant Restaurant @relation(fields: [restaurantId], references: [id])
+  menuCategoryId String 
+  menuCategory MenuCategory @relation(fields: [menuCategoryId], references: [id])
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Order {
+  id Int @id @default(autoincrement())
+  total Float
+  restaurantId String
+  status OrderStatus @default(PENDING)
+  orderProducts OrderProduct[]
+  consumptionMethod ConsumptionMethod @default(TAKE_AWAY)
+  restaurant Restaurant @relation(fields: [restaurantId], references: [id])
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model OrderProduct {
+  id String @id @default(uuid())
+  quantity Int
+  price Float
+  orderId String
+  productId String
+  order Order @relation(fields: [orderId], references: [id])
+  product Product @relation(fields: [productId], references: [id])
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+enum OrderStatus {
+  PENDING
+  IN_PREPARATION
+  FINISHED
+}
+
+enum ConsumptionMethod {
+  TAKE_AWAY
+  DINE_IN
 }
