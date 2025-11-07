@@ -6,7 +6,7 @@
 
 generator client {
   provider = "prisma-client"
-  output   = "../src/generated/prisma"
+  output   = "./generated"
 }
 
 datasource db {
@@ -18,6 +18,7 @@ model Restaurant {
   id       String      @id @default(uuid())
   name      String
   slug      String
+  description String
   avatarImageUrl String
   coverImageUrl String
   menuCategories MenuCategory[]
@@ -31,7 +32,7 @@ model MenuCategory {
   id       String      @id @default(uuid())
   name      String
   products  Product[]
-  restaurant Restaurant @relation(fields: [restaurant], references: [id])
+  restaurant Restaurant @relation(fields: [restaurantId], references: [id])
   restaurantId      String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -69,7 +70,7 @@ model OrderProduct {
   id String @id @default(uuid())
   quantity Int
   price Float
-  orderId String
+  orderId Int
   productId String
   order Order @relation(fields: [orderId], references: [id])
   product Product @relation(fields: [productId], references: [id])
