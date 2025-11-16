@@ -35,7 +35,7 @@ export default async function RestaurantMenuPage({
       >
         <ChevronLeftIcon />
       </Button>
-      <div className="relative mx-auto mb-4 h-[250px] w-full overflow-hidden md:h-[300px] lg:h-[350px] lg:w-[600px] lg:border-2 lg:border-white">
+      <div className="relative mx-auto mb-2 h-[250px] w-full overflow-hidden md:h-[300px] lg:h-[350px] lg:w-[600px] lg:border-2 lg:border-white">
         <Image
           src={restaurant?.coverImageUrl}
           alt={restaurant.name}
