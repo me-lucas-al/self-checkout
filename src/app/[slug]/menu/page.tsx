@@ -27,7 +27,7 @@ export default async function RestaurantMenuPage({
   }
 
   return (
-    <div className="lg:bg-red-800 lg:p-4">
+    <div className="lg:bg-[#d42d21]">
       <Button
         variant="secondary"
         size="icon"
@@ -35,7 +35,7 @@ export default async function RestaurantMenuPage({
       >
         <ChevronLeftIcon />
       </Button>
-      <div className="relative mx-auto mb-2 h-[250px] w-full overflow-hidden md:h-[300px]">
+      <div className="relative mx-auto mb-2 h-[250px] w-full overflow-hidden md:h-[300px] lg:h-[250px]">
         <div className="lg:hidden">
           <Image
             src={restaurant.coverImageUrl}
@@ -44,7 +44,7 @@ export default async function RestaurantMenuPage({
             className="object-cover"
           />
         </div>
-        <div className="hidden lg:block">
+        <div className="hidden lg:flex lg:items-center lg:justify-center lg:h-full ">
           <Image
             src={restaurant.avatarImageUrl}
             alt={restaurant.name}

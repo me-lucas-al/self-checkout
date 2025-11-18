@@ -23,7 +23,7 @@ const config: runtime.GetPrismaClientConfig = {
       "value": "prisma-client"
     },
     "output": {
-      "value": "D:\\Projetos\\self checkout\\restaurant\\prisma\\generated",
+      "value": "C:\\Lucas\\self-checkout\\prisma\\generated",
       "fromEnvVar": null
     },
     "config": {
@@ -37,7 +37,7 @@ const config: runtime.GetPrismaClientConfig = {
       }
     ],
     "previewFeatures": [],
-    "sourceFilePath": "D:\\Projetos\\self checkout\\restaurant\\prisma\\schema.prisma",
+    "sourceFilePath": "C:\\Lucas\\self-checkout\\prisma\\schema.prisma",
     "isCustomOutput": true
   },
   "relativePath": "..",
