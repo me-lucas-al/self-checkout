@@ -1,10 +1,8 @@
-import Image from 'next/image';
 import { notFound } from 'next/navigation';
 
-import { ChevronLeftIcon } from 'lucide-react';
-
-import { Button } from '@/components/ui/button';
 import { db } from '@/lib/prisma';
+
+import RestaurantCategories from './components/categories';
 import RestaurantHeader from './components/header';
 
 interface RestaurantMenuPageProps {
@@ -21,7 +19,7 @@ export default async function RestaurantMenuPage({
 }: RestaurantMenuPageProps) {
   const { slug } = await params;
   const { consumptionMethod } = await searchParams;
-  const restaurant = await db.restaurant.findUnique({ where: { slug } });
+  const restaurant = await db.restaurant.findUnique({ where: { slug }, include: { menuCategories: true } });
 
   if (!restaurant || !isConsuptionMethodValid(consumptionMethod)) {
     return notFound();
@@ -30,6 +28,7 @@ export default async function RestaurantMenuPage({
   return (
     <div>
       <RestaurantHeader restaurant={restaurant} />
+      <RestaurantCategories restaurant={restaurant} />
     </div>
   );
 }

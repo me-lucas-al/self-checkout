@@ -8,7 +8,7 @@ const poppins = Poppins({
   subsets: ['latin'],
 });
 export const metadata: Metadata = {
-  title: 'FSW Foods',
+  title: 'Self Checkout',
   description: 'App for restaurant self-checkout',
 };
 
