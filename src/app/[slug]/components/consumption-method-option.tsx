@@ -1,9 +1,9 @@
 import Image from 'next/image';
 import Link from 'next/link';
 
-import { ConsumptionMethod } from '../../../prisma/generated/enums';
-import { Button } from '../ui/button';
-import { Card, CardContent } from '../ui/card';
+import { ConsumptionMethod } from '../../../../prisma/generated/enums';
+import { Button } from '../../../components/ui/button';
+import { Card, CardContent } from '../../../components/ui/card';
 
 interface ConsumptionMethodOptionProps {
   imageUrl: string;
