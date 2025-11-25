@@ -19,7 +19,7 @@ export default async function RestaurantMenuPage({
 }: RestaurantMenuPageProps) {
   const { slug } = await params;
   const { consumptionMethod } = await searchParams;
-  const restaurant = await db.restaurant.findUnique({ where: { slug }, include: { menuCategories: true } });
+  const restaurant = await db.restaurant.findUnique({ where: { slug }, include: { menuCategories: { include: { products: true } } } });
 
   if (!restaurant || !isConsuptionMethodValid(consumptionMethod)) {
     return notFound();
