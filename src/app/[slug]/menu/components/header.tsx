@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react';
 import NextImage  from 'next/image';
 import { useRouter } from 'next/navigation';
 import  ColorThief  from "colorthief";
-import { ChevronLeftIcon } from 'lucide-react';
+import { ChevronLeftIcon, ScrollTextIcon } from 'lucide-react';
 
 import { Button } from '@/components/ui/button';
 
@@ -72,6 +72,12 @@ export default function RestaurantHeader({
           />
         </div>
       </div>
+      <Button
+        variant="secondary"
+        size="icon"
+        className="absolute top-4 right-4 z-50 rounded-full hover:cursor-pointer">
+          <ScrollTextIcon />
+      </Button>
     </div>
   );
 }
