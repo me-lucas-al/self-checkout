@@ -16,7 +16,7 @@ export default function Products({ products }: ProductsProps) {
         <Link
           href={`/${slug}/menu/${product.id}`}
           key={product.id}
-          className="flex items-center justify-between gap-10 border-b py-3"
+          className="flex items-center justify-between gap-10 border-b py-3 cursor-pointer"
         >
           <aside>
             <h3 className="text-sm font-medium">{product.name}</h3>

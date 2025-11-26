@@ -54,10 +54,10 @@ export default function RestaurantCategories({
         <p>Aberto!</p>
       </div>
     </div>
-      <ScrollArea className="w-full">
-        <div className="flex w-max space-x-4 p-4 pt-0 ">
+      <ScrollArea className="w-full c">
+        <div className="flex w-max space-x-4 p-4 pt-0">
           {restaurant.menuCategories.map((category) => (
-            <Button key={category.id} variant={getCategoryButtonVariant(category)} size='sm' className="rounded-full" onClick={()=> handleCategorySelect(category)}>
+            <Button key={category.id} variant={getCategoryButtonVariant(category)} size='sm' className="rounded-full cursor-pointer" onClick={()=> handleCategorySelect(category)}>
                 {category.name}
             </Button>
           ))}
