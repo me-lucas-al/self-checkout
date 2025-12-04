@@ -1,14 +1,17 @@
 'use client';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 
 import Image from 'next/image';
 
 import { ChefHatIcon, ChevronLeftIcon, ChevronRightIcon } from 'lucide-react';
 
 import { Button } from '@/components/ui/button';
+import { ScrollArea } from '@/components/ui/scroll-area';
 import { formatCurrencyBRL } from '@/lib/format-currency';
 
 import { Prisma } from '../../../../../../prisma/generated/client';
+import { CartContext } from '../../contexts/page';
+import { CartSheet } from '../../components/cart-sheet';
 
 interface ProductDetailsProps {
   product: Prisma.ProductGetPayload<{
@@ -23,6 +26,7 @@ interface ProductDetailsProps {
   }>;
 }
 export default function ProductDetails({ product }: ProductDetailsProps) {
+  const { toggleCart } = useContext(CartContext)
   const [quantity, setQuantity] = useState<number>(1);
   const handleDecreaseQuantity = () => {
     if (quantity > 1) {
@@ -30,13 +34,16 @@ export default function ProductDetails({ product }: ProductDetailsProps) {
     }
   };
 
+  const handleAddToCart = () => {
+    toggleCart()
+  }
   const handleIncreaseQuantity = () => {
     setQuantity((prev) => prev + 1);
   };
   return (
     <div className="relative z-50 -mt-6 flex flex-auto flex-col rounded-t-3xl p-5">
       <div className="flex-auto">
-        <div className="flex items-center gap-1.5 mb-3">
+        <div className="mb-3 flex items-center gap-1.5">
           <Image
             src={product.restaurant.avatarImageUrl}
             alt={product.restaurant.name}
@@ -51,14 +58,14 @@ export default function ProductDetails({ product }: ProductDetailsProps) {
 
         <h2 className="text-xl font-semibold">{product.name}</h2>
 
-        <div className="flex items-center justify-between">
+        <div className="mt-3 flex items-center justify-between">
           <h3 className="text-xl font-semibold">
             {formatCurrencyBRL(product.price)}
           </h3>
           <div className="flex items-center gap-3 text-center">
             <Button
               variant="outline"
-              className="h-8 w-8 rounded-xl cursor-pointer"
+              className="h-8 w-8 cursor-pointer rounded-xl"
               onClick={handleDecreaseQuantity}
             >
               <ChevronLeftIcon />
@@ -66,7 +73,7 @@ export default function ProductDetails({ product }: ProductDetailsProps) {
             <p className="w-4">{quantity}</p>
             <Button
               variant="destructive"
-              className="h-8 w-8 rounded-xl cursor-pointer"
+              className="h-8 w-8 cursor-pointer rounded-xl"
               onClick={handleIncreaseQuantity}
             >
               <ChevronRightIcon />
@@ -79,16 +86,28 @@ export default function ProductDetails({ product }: ProductDetailsProps) {
           <p className="text-muted-foreground text-sm">{product.description}</p>
         </div>
 
-        <div className="mt-6 space-y-3">
-          <div className="flex items-center gap-1">
-            <ChefHatIcon />
-            <h4 className="font-semibold">Ingredientes</h4>
+        <ScrollArea className="h-full">
+          <div className="mt-6 space-y-3">
+            <div className="flex items-center gap-1">
+              <ChefHatIcon />
+              <h4 className="font-semibold">Ingredientes</h4>
+            </div>
+            <ul className="text-muted-foreground list-disc px-5 text-sm">
+              {product.ingredients.map((ingredient) => (
+                <li key={ingredient} className="">
+                  {ingredient}
+                </li>
+              ))}
+            </ul>
           </div>
-          <p className="text-muted-foreground text-sm">{product.description}</p>
-        </div>
+        </ScrollArea>
       </div>
 
-      <Button className="mt-6 w-full lg:w-[300px] lg:m-auto cursor-pointer lg:mb-2 lg:h-11">Adicionar à sacola</Button>
+      <Button className="mt-6 w-full cursor-pointer lg:m-auto lg:mb-2 lg:h-11 lg:w-[300px]" onClick={handleAddToCart}>
+        Adicionar à sacola
+      </Button>
+
+      <CartSheet/>
     </div>
   );
 }
