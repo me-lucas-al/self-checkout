@@ -16,7 +16,7 @@ import {
 import { CartContext } from '../contexts/page';
 
 export function CartSheet() {
-  const { isOpen, toggleCart } = useContext(CartContext);
+  const { isOpen, toggleCart, products } = useContext(CartContext);
   return (
     <Sheet open={isOpen} onOpenChange={toggleCart}>
       <SheetContent>
@@ -26,16 +26,16 @@ export function CartSheet() {
             Make changes to your profile here. Click save when you&apos;re done.
           </SheetDescription>
         </SheetHeader>
-        <div className="grid flex-1 auto-rows-min gap-6 px-4">
-          <div className="grid gap-3">
-            <Label htmlFor="sheet-demo-name">Name</Label>
-            <Input id="sheet-demo-name" defaultValue="Pedro Duarte" />
+        
+      { products.map((product) => (
+        <div key={product.id} className="flex justify-between items-center mb-4">
+          <div> 
+            <p className="font-medium">{product.name}</p>
+            <p className="text-sm text-muted-foreground">Quantity: {product.quantity}</p>
           </div>
-          <div className="grid gap-3">
-            <Label htmlFor="sheet-demo-username">Username</Label>
-            <Input id="sheet-demo-username" defaultValue="@peduarte" />
-          </div>
+          <p className="font-medium">{product.price}</p>
         </div>
+      ))}
         <SheetFooter>
           <Button type="submit">Save changes</Button>
           <SheetClose asChild>
