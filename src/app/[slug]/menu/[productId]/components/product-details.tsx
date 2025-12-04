@@ -10,8 +10,8 @@ import { ScrollArea } from '@/components/ui/scroll-area';
 import { formatCurrencyBRL } from '@/lib/format-currency';
 
 import { Prisma } from '../../../../../../prisma/generated/client';
-import { CartContext } from '../../contexts/page';
 import { CartSheet } from '../../components/cart-sheet';
+import { CartContext } from '../../contexts/cart';
 
 interface ProductDetailsProps {
   product: Prisma.ProductGetPayload<{
@@ -26,7 +26,7 @@ interface ProductDetailsProps {
   }>;
 }
 export default function ProductDetails({ product }: ProductDetailsProps) {
-  const { toggleCart, addProduct } = useContext(CartContext)
+  const { toggleCart, addProduct } = useContext(CartContext);
   const [quantity, setQuantity] = useState<number>(1);
   const handleDecreaseQuantity = () => {
     if (quantity > 1) {
@@ -38,9 +38,9 @@ export default function ProductDetails({ product }: ProductDetailsProps) {
     addProduct({
       ...product,
       quantity,
-    })
-    toggleCart()
-  }
+    });
+    toggleCart();
+  };
   const handleIncreaseQuantity = () => {
     setQuantity((prev) => prev + 1);
   };
@@ -107,7 +107,10 @@ export default function ProductDetails({ product }: ProductDetailsProps) {
         </ScrollArea>
       </div>
 
-      <Button className="mt-6 w-full cursor-pointer lg:m-auto lg:mb-2 lg:h-11 lg:w-[300px]" onClick={handleAddToCart}>
+      <Button
+        className="mt-6 w-full cursor-pointer lg:m-auto lg:mb-2 lg:h-11 lg:w-[300px]"
+        onClick={handleAddToCart}
+      >
         Adicionar à sacola
       </Button>
 

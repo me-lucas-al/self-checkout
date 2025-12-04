@@ -13,7 +13,7 @@ import {
   SheetTitle,
 } from '@/components/ui/sheet';
 
-import { CartContext } from '../contexts/page';
+import { CartContext } from '../contexts/cart';
 
 export function CartSheet() {
   const { isOpen, toggleCart, products } = useContext(CartContext);
@@ -26,16 +26,21 @@ export function CartSheet() {
             Make changes to your profile here. Click save when you&apos;re done.
           </SheetDescription>
         </SheetHeader>
-        
-      { products.map((product) => (
-        <div key={product.id} className="flex justify-between items-center mb-4">
-          <div> 
-            <p className="font-medium">{product.name}</p>
-            <p className="text-sm text-muted-foreground">Quantity: {product.quantity}</p>
+
+        {products.map((product) => (
+          <div
+            key={product.id}
+            className="mb-4 flex items-center justify-between"
+          >
+            <div>
+              <p className="font-medium">{product.name}</p>
+              <p className="text-muted-foreground text-sm">
+                Quantity: {product.quantity}
+              </p>
+            </div>
+            <p className="font-medium">{product.price}</p>
           </div>
-          <p className="font-medium">{product.price}</p>
-        </div>
-      ))}
+        ))}
         <SheetFooter>
           <Button type="submit">Save changes</Button>
           <SheetClose asChild>
