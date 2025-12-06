@@ -1,46 +1,31 @@
 import { useContext } from 'react';
 
 import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
 import {
   Sheet,
   SheetClose,
   SheetContent,
-  SheetDescription,
   SheetFooter,
   SheetHeader,
-  SheetTitle,
+  SheetTitle
 } from '@/components/ui/sheet';
 
 import { CartContext } from '../contexts/cart';
+import CartProductItem from './cart-product-item';
 
 export function CartSheet() {
   const { isOpen, toggleCart, products } = useContext(CartContext);
   return (
     <Sheet open={isOpen} onOpenChange={toggleCart}>
-      <SheetContent>
+      <SheetContent className="w-[80%]">
         <SheetHeader>
-          <SheetTitle>Edit profile</SheetTitle>
-          <SheetDescription>
-            Make changes to your profile here. Click save when you&apos;re done.
-          </SheetDescription>
+          <SheetTitle className="text-left">Sacola</SheetTitle>
         </SheetHeader>
-
-        {products.map((product) => (
-          <div
-            key={product.id}
-            className="mb-4 flex items-center justify-between"
-          >
-            <div>
-              <p className="font-medium">{product.name}</p>
-              <p className="text-muted-foreground text-sm">
-                Quantity: {product.quantity}
-              </p>
-            </div>
-            <p className="font-medium">{product.price}</p>
-          </div>
-        ))}
+        <div className="py-5">
+          {products.map((product) => (
+            <CartProductItem key={product.id} product={product} />
+          ))}
+        </div>
         <SheetFooter>
           <Button type="submit">Save changes</Button>
           <SheetClose asChild>
