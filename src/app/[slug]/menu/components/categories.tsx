@@ -27,6 +27,7 @@ type MenuCategoriesWithProducts = Prisma.MenuCategoryGetPayload<{
 export default function RestaurantCategories({
   restaurant,
 }: RestaurantCategoriesProps) {
+  
     const [selectedCategory, setSelectedCategory] = useState<MenuCategoriesWithProducts>(restaurant.menuCategories[0]);
     const handleCategorySelect = (category: MenuCategoriesWithProducts) => {
         setSelectedCategory(category);

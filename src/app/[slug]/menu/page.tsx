@@ -11,6 +11,7 @@ interface RestaurantMenuPageProps {
 }
 
 const isConsuptionMethodValid = (method: string) => {
+  if (!method) return false;
   return ['DINE_IN', 'TAKE_AWAY'].includes(method.toUpperCase());
 };
 export default async function RestaurantMenuPage({
