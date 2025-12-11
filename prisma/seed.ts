@@ -1,11 +1,9 @@
  
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { PrismaClient } from './generated/client';
-
-const prismaClient = new PrismaClient();
+import { db } from '../src/lib/prisma';
 
 const main = async () => {
-  await prismaClient.$transaction(async (tx: any) => {
+  await db.$transaction(async (tx: any) => {
     await tx.restaurant.deleteMany();
     const restaurant = await tx.restaurant.create({
       data: {
@@ -318,5 +316,5 @@ main()
     throw e;
   })
   .finally(async () => {
-    await prismaClient.$disconnect();
+    await db.$disconnect();
   });
