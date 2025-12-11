@@ -3,6 +3,7 @@ import { notFound } from 'next/navigation';
 
 import ConsumptionMethodOption from './components/consumption-method-option';
 import { db } from '@/lib/prisma';
+import { BackButton } from './components/back-button';
 
 interface RestaurantPageProps {
   params: Promise<{ slug: string }>;
@@ -11,13 +12,12 @@ interface RestaurantPageProps {
 export default async function Restaurant({ params }: RestaurantPageProps) {
   const { slug } = await params;
   const restaurant = await db.restaurant.findUnique({ where: { slug } });
-
   if (!restaurant) {
     return notFound();
   }
-
   return (
     <div className="flex h-screen flex-col items-center justify-center px-6 pt-96 md:pt-24">
+      <BackButton />
       <div className="flex flex-col items-center gap-2">
         <Image
           src={restaurant.avatarImageUrl}
