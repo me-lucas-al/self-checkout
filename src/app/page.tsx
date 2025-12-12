@@ -11,17 +11,15 @@ export default async function Home() {
     <div className="min-h-screen bg-neutral-50 p-6">
       <div className="mx-auto max-w-4xl space-y-8">
         
-        {/* Cabeçalho */}
         <div className="text-center space-y-2">
           <h1 className="text-4xl font-bold tracking-tight text-neutral-900">
-            Bem-vindo ao Self Checkout
+            Self Checkout
           </h1>
           <p className="text-lg text-neutral-600">
             Escolha um restaurante para ver o cardápio e fazer seu pedido
           </p>
         </div>
 
-        {/* Lista de Restaurantes */}
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {restaurants.map((restaurant) => (
             <Link 
@@ -31,7 +29,6 @@ export default async function Home() {
             >
               <Card className="h-full overflow-hidden border-neutral-200 transition-all hover:border-primary/50 hover:shadow-lg">
                 <CardContent className="p-0">
-                  {/* Imagem de Capa */}
                   <div className="relative h-32 w-full bg-neutral-200">
                     <Image
                       src={restaurant.coverImageUrl}
@@ -41,9 +38,7 @@ export default async function Home() {
                     />
                   </div>
 
-                  {/* Informações do Restaurante */}
                   <div className="relative px-4 pb-4 pt-10">
-                    {/* Avatar (Sobreposto) */}
                     <div className="absolute -top-8 left-4 h-16 w-16 overflow-hidden rounded-full border-4 border-white bg-white shadow-sm">
                       <Image
                         src={restaurant.avatarImageUrl}
@@ -76,17 +71,12 @@ export default async function Home() {
             </Link>
           ))}
         </div>
-
-        {/* Estado Vazio (Caso não haja restaurantes) */}
         {restaurants.length === 0 && (
           <div className="flex flex-col items-center justify-center rounded-lg border border-dashed border-neutral-300 bg-white p-12 text-center">
             <div className="h-12 w-12 text-neutral-400">🏪</div>
             <h3 className="mt-4 text-lg font-semibold text-neutral-900">
               Nenhum restaurante encontrado
             </h3>
-            <p className="mt-2 text-sm text-neutral-500">
-              Parece que ainda não temos parceiros cadastrados.
-            </p>
           </div>
         )}
       </div>

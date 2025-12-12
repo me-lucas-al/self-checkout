@@ -37,6 +37,7 @@ export default function ProductHeader({ product }: ProductHeaderProps) {
         variant="secondary"
         size="icon"
         className="absolute top-4 right-4 z-50 rounded-full hover:cursor-pointer"
+        onClick={ ()=> router.push('/cart-sheet') }
       >
         <ScrollTextIcon />
       </Button>

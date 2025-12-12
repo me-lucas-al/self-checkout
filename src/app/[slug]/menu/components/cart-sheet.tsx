@@ -1,21 +1,22 @@
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 
 import { Button } from '@/components/ui/button';
+import { Card, CardContent } from '@/components/ui/card';
 import {
   Sheet,
-  SheetClose,
   SheetContent,
   SheetFooter,
   SheetHeader,
-  SheetTitle
+  SheetTitle,
 } from '@/components/ui/sheet';
-
-import { CartContext } from '../contexts/cart';
-import CartProductItem from './cart-product-item';
-import { Card, CardContent } from '@/components/ui/card';
 import { formatCurrencyBRL } from '@/lib/format-currency';
 
+import { CartContext } from '../contexts/cart';
+import { CartProductItem } from './cart-product-item';
+import { FinishOrderDrawer } from './finish-order-drawer';
+
 export function CartSheet() {
+  const [finishOrderDrawerIsOpen, setFinishOrderDrawerIsOpen] = useState(false);
   const { isOpen, toggleCart, products, total } = useContext(CartContext);
   return (
     <Sheet open={isOpen} onOpenChange={toggleCart}>
@@ -28,16 +29,29 @@ export function CartSheet() {
             <CartProductItem key={product.id} product={product} />
           ))}
         </div>
-        <Card className='mb-6'>
-          <CardContent className='p-5'>
+        <Card className="mb-6">
+          <CardContent className="p-5">
             <div className="flex justify-between">
-              <p className='text-sm text-muted-foreground'>Total</p>
-              <p className='text-sm font-semibold'>{formatCurrencyBRL(total)}</p>
+              <p className="text-muted-foreground text-sm">Total</p>
+              <p className="text-sm font-semibold">
+                {formatCurrencyBRL(total)}
+              </p>
             </div>
           </CardContent>
         </Card>
         <SheetFooter>
-          <Button type="submit">Finalizar Pedido</Button>
+          <FinishOrderDrawer
+            open={finishOrderDrawerIsOpen}
+            onOpenChange={setFinishOrderDrawerIsOpen}
+          >
+            <Button
+              className="cursor-pointer"
+              type="submit"
+              onClick={() => setFinishOrderDrawerIsOpen(true)}
+            >
+              Finalizar Pedido
+            </Button>
+          </FinishOrderDrawer>
         </SheetFooter>
       </SheetContent>
     </Sheet>

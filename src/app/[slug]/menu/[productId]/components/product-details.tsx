@@ -1,7 +1,9 @@
 'use client';
 
 import { useContext, useState } from 'react';
+
 import Image from 'next/image';
+
 import { ChefHatIcon, ChevronLeftIcon, ChevronRightIcon } from 'lucide-react';
 
 import { Button } from '@/components/ui/button';
@@ -48,9 +50,7 @@ export default function ProductDetails({ product }: ProductDetailsProps) {
   };
 
   return (
-
     <div className="relative z-50 -mt-6 flex h-full flex-col rounded-t-3xl bg-white p-5 shadow-xl">
-      
       <div className="flex-1 overflow-hidden">
         <div className="mb-3 flex items-center gap-1.5">
           <div className="relative h-6 w-6 overflow-hidden rounded-full">
@@ -61,7 +61,7 @@ export default function ProductDetails({ product }: ProductDetailsProps) {
               className="object-cover"
             />
           </div>
-          <p className="text-xs text-muted-foreground">
+          <p className="text-muted-foreground text-xs">
             {product.restaurant.name}
           </p>
         </div>
@@ -96,7 +96,9 @@ export default function ProductDetails({ product }: ProductDetailsProps) {
         <ScrollArea className="h-full pb-6">
           <div className="mt-6 space-y-3">
             <h4 className="font-semibold">Sobre</h4>
-            <p className="text-sm text-muted-foreground">{product.description}</p>
+            <p className="text-muted-foreground text-sm">
+              {product.description}
+            </p>
           </div>
 
           <div className="mt-6 space-y-3 pb-4">
@@ -104,7 +106,7 @@ export default function ProductDetails({ product }: ProductDetailsProps) {
               <ChefHatIcon size={18} />
               <h4 className="font-semibold">Ingredientes</h4>
             </div>
-            <ul className="list-disc px-5 text-sm text-muted-foreground">
+            <ul className="text-muted-foreground list-disc px-5 text-sm">
               {product.ingredients.map((ingredient) => (
                 <li key={ingredient}>{ingredient}</li>
               ))}
@@ -113,15 +115,14 @@ export default function ProductDetails({ product }: ProductDetailsProps) {
         </ScrollArea>
       </div>
 
-      <div className="pt-4 flex items-center">
+      <div className="flex items-center pt-4">
         <Button
-          className="w-full py-6 font-semibold cursor-pointer lg:m-auto lg:mb-2 lg:h-11 lg:w-[300px] m-auto"
+          className="m-auto w-full cursor-pointer py-6 font-semibold lg:m-auto lg:mb-2 lg:h-11 lg:w-[300px]"
           onClick={handleAddToCart}
         >
           Adicionar à sacola
         </Button>
       </div>
-
       <CartSheet />
     </div>
   );

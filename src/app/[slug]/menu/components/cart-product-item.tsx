@@ -1,35 +1,36 @@
-import { ChevronLeftIcon, ChevronRightIcon, TrashIcon } from "lucide-react";
-import Image from "next/image";
-import { useContext } from "react";
+import { useContext } from 'react';
 
-import { Button } from "@/components/ui/button";
-import { formatCurrencyBRL } from "@/lib/format-currency";
+import Image from 'next/image';
 
-import { CartContext, CartProduct } from "../contexts/cart";
+import { ChevronLeftIcon, ChevronRightIcon, TrashIcon } from 'lucide-react';
+
+import { Button } from '@/components/ui/button';
+import { formatCurrencyBRL } from '@/lib/format-currency';
+
+import { CartContext, CartProduct } from '../contexts/cart';
 
 interface CartItemProps {
   product: CartProduct;
 }
 
-const CartProductItem = ({ product }: CartItemProps) => {
-  const { decreaseProductQuantity, increaseProductQuantity, removeProduct } =
-    useContext(CartContext);
+export function CartProductItem({ product }: CartItemProps) {
+  const { decreaseProductQuantity, increaseProductQuantity, removeProduct } = useContext(CartContext);
   return (
-    <div className="flex items-center justify-between ">
-      <div className="flex items-center gap-3 ml-2 -mt-5">
-        <div className="relative h-20 w-20 rounded-xl bg-gray-100">
+    <div className="-mt-5 flex w-full items-center gap-2">
+      <div className="ml-2 flex items-center gap-3">
+        <div className="relative h-20 w-20 shrink-0 rounded-xl bg-gray-100">
           <Image src={product.imageUrl} alt={product.name} fill />
         </div>
         <div className="space-y-1">
-          <p className="max-w-[90%] truncate text-ellipsis text-xs">
+          <p className="max-w-[90%] truncate text-xs text-ellipsis">
             {product.name}
           </p>
           <p className="text-sm font-semibold">
             {formatCurrencyBRL(product.price)}
           </p>
-          <div className="flex items-center gap-1 text-center max-w-[70%]">
+          <div className="flex max-w-[70%] items-center gap-1 text-center">
             <Button
-              className="h-7 w-7 rounded-lg"
+              className="h-7 w-7 cursor-pointer rounded-lg"
               variant="outline"
               onClick={() => decreaseProductQuantity(product.id)}
             >
@@ -37,7 +38,7 @@ const CartProductItem = ({ product }: CartItemProps) => {
             </Button>
             <p className="w-7 text-xs">{product.quantity}</p>
             <Button
-              className="h-7 w-7 rounded-lg"
+              className="h-7 w-7 cursor-pointer rounded-lg"
               variant="destructive"
               onClick={() => increaseProductQuantity(product.id)}
             >
@@ -47,7 +48,7 @@ const CartProductItem = ({ product }: CartItemProps) => {
         </div>
       </div>
       <Button
-        className="h-7 w-7  rounded-lg p-0"
+        className="h-7 w-7 shrink-0 cursor-pointer rounded-lg p-0"
         variant="outline"
         onClick={() => removeProduct(product.id)}
       >
@@ -55,6 +56,4 @@ const CartProductItem = ({ product }: CartItemProps) => {
       </Button>
     </div>
   );
-};
-
-export default CartProductItem;
+}
