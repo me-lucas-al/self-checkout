@@ -1,3 +1,7 @@
+export function removeCpfPunctuation(cpf: string): string {
+  return cpf.replace(/\D/g, '')
+}
+
 export function validateCPF(cpf: string): boolean {
   cpf = cpf.replace(/\D/g, "");
 

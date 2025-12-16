@@ -1,10 +1,16 @@
 'use client';
+import { useContext, useTransition } from 'react';
 import { useForm } from 'react-hook-form';
 import { PatternFormat } from 'react-number-format';
 
+import { useParams, useSearchParams } from 'next/navigation';
+
 import { zodResolver } from '@hookform/resolvers/zod';
+import { Loader2Icon } from 'lucide-react';
+import { toast } from 'sonner';
 import { z } from 'zod';
 
+import { createOrder } from '@/app/actions/create-order';
 import { Button } from '@/components/ui/button';
 import {
   Drawer,
@@ -28,6 +34,9 @@ import { Input } from '@/components/ui/input';
 import { cn } from '@/lib/utils';
 import { validateCPF } from '@/lib/validate-cpf';
 
+import { ConsumptionMethod } from '../../../../../prisma/generated/enums';
+import { CartContext } from '../contexts/cart';
+
 const formSchema = z.object({
   name: z.string().trim().min(2, { message: 'O nome é obrigatório' }),
   cpf: z
@@ -49,6 +58,14 @@ export function FinishOrderDrawer({
   open,
   onOpenChange,
 }: FinishOrderDrawerProps) {
+  const { slug } = useParams<{ slug: string }>();
+  const { products } = useContext(CartContext);
+  const [isPending, startTransition] = useTransition();
+  const searchParams = useSearchParams();
+  const consumptionMethod = searchParams.get(
+    'consumptionMethod'
+  ) as ConsumptionMethod;
+
   const form = useForm<FormSchema>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -58,8 +75,23 @@ export function FinishOrderDrawer({
     shouldUnregister: true,
   });
 
-  const onSubmit = (data: FormSchema) => {
-    console.log(data);
+  const onSubmit = async (data: FormSchema) => {
+    try {
+      startTransition(async () => {
+        await createOrder({
+          consumptionMethod: consumptionMethod,
+          customerCpf: data.cpf,
+          customerName: data.name,
+          products,
+          slug,
+        });
+
+        onOpenChange(false);
+        toast.success('Pedido criado com sucesso!');
+      });
+    } catch (error) {
+      console.error('Erro ao criar o pedido:', error);
+    }
   };
   return (
     <Drawer>
@@ -71,7 +103,7 @@ export function FinishOrderDrawer({
             Insira as suas informações abaixo para finalizar o pedido
           </DrawerDescription>
         </DrawerHeader>
-        <div className="p-5 lg:m-auto lg:w-6xl lg:mr-8">
+        <div className="p-5 lg:m-auto lg:mr-8 lg:w-6xl">
           <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
               <FormField
@@ -81,7 +113,11 @@ export function FinishOrderDrawer({
                   <FormItem>
                     <FormLabel>Nome</FormLabel>
                     <FormControl>
-                      <Input className='lg:w-[40%]' placeholder="Digite seu nome..." {...field} />
+                      <Input
+                        className="lg:w-[40%]"
+                        placeholder="Digite seu nome..."
+                        {...field}
+                      />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -97,12 +133,7 @@ export function FinishOrderDrawer({
                       <PatternFormat
                         format="###.###.###-##"
                         placeholder="Digite seu CPF..."
-                        className={cn(
-                          'file:text-foreground placeholder:text-muted-foreground selection:bg-primary selection:text-primary-foreground dark:bg-input/30 border-input h-9 w-full min-w-0 rounded-md border bg-transparent px-3 py-1 text-base shadow-xs transition-[color,box-shadow] outline-none file:inline-flex file:h-7 file:border-0 file:bg-transparent file:text-sm file:font-medium disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50 md:text-sm',
-                          'focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px]',
-                          'aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive'
-                          ,'lg:w-[40%]'
-                        )}
+                        customInput={Input}
                         {...field}
                       />
                     </FormControl>
@@ -114,7 +145,9 @@ export function FinishOrderDrawer({
                 <Button
                   className="w-full cursor-pointer rounded-full lg:w-[40%]"
                   type="submit"
+                  disabled={isPending}
                 >
+                  {isPending && <Loader2Icon className="animate-spin" />}
                   Finalizar
                 </Button>
                 <DrawerClose asChild>
