@@ -51,6 +51,8 @@ model Order {
   id                Int               @id @default(autoincrement())
   total             Float
   restaurantId      String
+  customerName      String
+  customerCpf       String
   status            OrderStatus       @default(PENDING)
   consumptionMethod ConsumptionMethod @default(TAKE_AWAY)
   createdAt         DateTime          @default(now())

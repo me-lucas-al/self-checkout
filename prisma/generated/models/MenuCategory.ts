@@ -182,8 +182,8 @@ export type MenuCategoryWhereInput = {
   restaurantId?: Prisma.StringFilter<"MenuCategory"> | string
   createdAt?: Prisma.DateTimeFilter<"MenuCategory"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"MenuCategory"> | Date | string
-  products?: Prisma.ProductListRelationFilter
   restaurant?: Prisma.XOR<Prisma.RestaurantScalarRelationFilter, Prisma.RestaurantWhereInput>
+  products?: Prisma.ProductListRelationFilter
 }
 
 export type MenuCategoryOrderByWithRelationInput = {
@@ -192,8 +192,8 @@ export type MenuCategoryOrderByWithRelationInput = {
   restaurantId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
-  products?: Prisma.ProductOrderByRelationAggregateInput
   restaurant?: Prisma.RestaurantOrderByWithRelationInput
+  products?: Prisma.ProductOrderByRelationAggregateInput
 }
 
 export type MenuCategoryWhereUniqueInput = Prisma.AtLeast<{
@@ -205,8 +205,8 @@ export type MenuCategoryWhereUniqueInput = Prisma.AtLeast<{
   restaurantId?: Prisma.StringFilter<"MenuCategory"> | string
   createdAt?: Prisma.DateTimeFilter<"MenuCategory"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"MenuCategory"> | Date | string
-  products?: Prisma.ProductListRelationFilter
   restaurant?: Prisma.XOR<Prisma.RestaurantScalarRelationFilter, Prisma.RestaurantWhereInput>
+  products?: Prisma.ProductListRelationFilter
 }, "id">
 
 export type MenuCategoryOrderByWithAggregationInput = {
@@ -236,8 +236,8 @@ export type MenuCategoryCreateInput = {
   name: string
   createdAt?: Date | string
   updatedAt?: Date | string
-  products?: Prisma.ProductCreateNestedManyWithoutMenuCategoryInput
   restaurant: Prisma.RestaurantCreateNestedOneWithoutMenuCategoriesInput
+  products?: Prisma.ProductCreateNestedManyWithoutMenuCategoryInput
 }
 
 export type MenuCategoryUncheckedCreateInput = {
@@ -254,8 +254,8 @@ export type MenuCategoryUpdateInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  products?: Prisma.ProductUpdateManyWithoutMenuCategoryNestedInput
   restaurant?: Prisma.RestaurantUpdateOneRequiredWithoutMenuCategoriesNestedInput
+  products?: Prisma.ProductUpdateManyWithoutMenuCategoryNestedInput
 }
 
 export type MenuCategoryUncheckedUpdateInput = {
@@ -553,8 +553,8 @@ export type MenuCategorySelect<ExtArgs extends runtime.Types.Extensions.Internal
   restaurantId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
-  products?: boolean | Prisma.MenuCategory$productsArgs<ExtArgs>
   restaurant?: boolean | Prisma.RestaurantDefaultArgs<ExtArgs>
+  products?: boolean | Prisma.MenuCategory$productsArgs<ExtArgs>
   _count?: boolean | Prisma.MenuCategoryCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["menuCategory"]>
 
@@ -586,8 +586,8 @@ export type MenuCategorySelectScalar = {
 
 export type MenuCategoryOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "restaurantId" | "createdAt" | "updatedAt", ExtArgs["result"]["menuCategory"]>
 export type MenuCategoryInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  products?: boolean | Prisma.MenuCategory$productsArgs<ExtArgs>
   restaurant?: boolean | Prisma.RestaurantDefaultArgs<ExtArgs>
+  products?: boolean | Prisma.MenuCategory$productsArgs<ExtArgs>
   _count?: boolean | Prisma.MenuCategoryCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type MenuCategoryIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -600,8 +600,8 @@ export type MenuCategoryIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types
 export type $MenuCategoryPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "MenuCategory"
   objects: {
-    products: Prisma.$ProductPayload<ExtArgs>[]
     restaurant: Prisma.$RestaurantPayload<ExtArgs>
+    products: Prisma.$ProductPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1003,8 +1003,8 @@ readonly fields: MenuCategoryFieldRefs;
  */
 export interface Prisma__MenuCategoryClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  products<T extends Prisma.MenuCategory$productsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.MenuCategory$productsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ProductPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   restaurant<T extends Prisma.RestaurantDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.RestaurantDefaultArgs<ExtArgs>>): Prisma.Prisma__RestaurantClient<runtime.Types.Result.GetResult<Prisma.$RestaurantPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  products<T extends Prisma.MenuCategory$productsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.MenuCategory$productsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ProductPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.

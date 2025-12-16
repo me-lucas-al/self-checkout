@@ -253,8 +253,8 @@ export type ProductWhereInput = {
   createdAt?: Prisma.DateTimeFilter<"Product"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Product"> | Date | string
   orderProducts?: Prisma.OrderProductListRelationFilter
-  restaurant?: Prisma.XOR<Prisma.RestaurantScalarRelationFilter, Prisma.RestaurantWhereInput>
   menuCategory?: Prisma.XOR<Prisma.MenuCategoryScalarRelationFilter, Prisma.MenuCategoryWhereInput>
+  restaurant?: Prisma.XOR<Prisma.RestaurantScalarRelationFilter, Prisma.RestaurantWhereInput>
 }
 
 export type ProductOrderByWithRelationInput = {
@@ -269,8 +269,8 @@ export type ProductOrderByWithRelationInput = {
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   orderProducts?: Prisma.OrderProductOrderByRelationAggregateInput
-  restaurant?: Prisma.RestaurantOrderByWithRelationInput
   menuCategory?: Prisma.MenuCategoryOrderByWithRelationInput
+  restaurant?: Prisma.RestaurantOrderByWithRelationInput
 }
 
 export type ProductWhereUniqueInput = Prisma.AtLeast<{
@@ -288,8 +288,8 @@ export type ProductWhereUniqueInput = Prisma.AtLeast<{
   createdAt?: Prisma.DateTimeFilter<"Product"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Product"> | Date | string
   orderProducts?: Prisma.OrderProductListRelationFilter
-  restaurant?: Prisma.XOR<Prisma.RestaurantScalarRelationFilter, Prisma.RestaurantWhereInput>
   menuCategory?: Prisma.XOR<Prisma.MenuCategoryScalarRelationFilter, Prisma.MenuCategoryWhereInput>
+  restaurant?: Prisma.XOR<Prisma.RestaurantScalarRelationFilter, Prisma.RestaurantWhereInput>
 }, "id">
 
 export type ProductOrderByWithAggregationInput = {
@@ -336,8 +336,8 @@ export type ProductCreateInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   orderProducts?: Prisma.OrderProductCreateNestedManyWithoutProductInput
-  restaurant: Prisma.RestaurantCreateNestedOneWithoutProductsInput
   menuCategory: Prisma.MenuCategoryCreateNestedOneWithoutProductsInput
+  restaurant: Prisma.RestaurantCreateNestedOneWithoutProductsInput
 }
 
 export type ProductUncheckedCreateInput = {
@@ -364,8 +364,8 @@ export type ProductUpdateInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   orderProducts?: Prisma.OrderProductUpdateManyWithoutProductNestedInput
-  restaurant?: Prisma.RestaurantUpdateOneRequiredWithoutProductsNestedInput
   menuCategory?: Prisma.MenuCategoryUpdateOneRequiredWithoutProductsNestedInput
+  restaurant?: Prisma.RestaurantUpdateOneRequiredWithoutProductsNestedInput
 }
 
 export type ProductUncheckedUpdateInput = {
@@ -731,8 +731,8 @@ export type ProductCreateWithoutOrderProductsInput = {
   ingredients?: Prisma.ProductCreateingredientsInput | string[]
   createdAt?: Date | string
   updatedAt?: Date | string
-  restaurant: Prisma.RestaurantCreateNestedOneWithoutProductsInput
   menuCategory: Prisma.MenuCategoryCreateNestedOneWithoutProductsInput
+  restaurant: Prisma.RestaurantCreateNestedOneWithoutProductsInput
 }
 
 export type ProductUncheckedCreateWithoutOrderProductsInput = {
@@ -773,8 +773,8 @@ export type ProductUpdateWithoutOrderProductsInput = {
   ingredients?: Prisma.ProductUpdateingredientsInput | string[]
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  restaurant?: Prisma.RestaurantUpdateOneRequiredWithoutProductsNestedInput
   menuCategory?: Prisma.MenuCategoryUpdateOneRequiredWithoutProductsNestedInput
+  restaurant?: Prisma.RestaurantUpdateOneRequiredWithoutProductsNestedInput
 }
 
 export type ProductUncheckedUpdateWithoutOrderProductsInput = {
@@ -933,8 +933,8 @@ export type ProductSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   createdAt?: boolean
   updatedAt?: boolean
   orderProducts?: boolean | Prisma.Product$orderProductsArgs<ExtArgs>
-  restaurant?: boolean | Prisma.RestaurantDefaultArgs<ExtArgs>
   menuCategory?: boolean | Prisma.MenuCategoryDefaultArgs<ExtArgs>
+  restaurant?: boolean | Prisma.RestaurantDefaultArgs<ExtArgs>
   _count?: boolean | Prisma.ProductCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["product"]>
 
@@ -949,8 +949,8 @@ export type ProductSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exten
   menuCategoryId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
-  restaurant?: boolean | Prisma.RestaurantDefaultArgs<ExtArgs>
   menuCategory?: boolean | Prisma.MenuCategoryDefaultArgs<ExtArgs>
+  restaurant?: boolean | Prisma.RestaurantDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["product"]>
 
 export type ProductSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -964,8 +964,8 @@ export type ProductSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exten
   menuCategoryId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
-  restaurant?: boolean | Prisma.RestaurantDefaultArgs<ExtArgs>
   menuCategory?: boolean | Prisma.MenuCategoryDefaultArgs<ExtArgs>
+  restaurant?: boolean | Prisma.RestaurantDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["product"]>
 
 export type ProductSelectScalar = {
@@ -984,25 +984,25 @@ export type ProductSelectScalar = {
 export type ProductOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "description" | "imageUrl" | "price" | "ingredients" | "restaurantId" | "menuCategoryId" | "createdAt" | "updatedAt", ExtArgs["result"]["product"]>
 export type ProductInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   orderProducts?: boolean | Prisma.Product$orderProductsArgs<ExtArgs>
-  restaurant?: boolean | Prisma.RestaurantDefaultArgs<ExtArgs>
   menuCategory?: boolean | Prisma.MenuCategoryDefaultArgs<ExtArgs>
+  restaurant?: boolean | Prisma.RestaurantDefaultArgs<ExtArgs>
   _count?: boolean | Prisma.ProductCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type ProductIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  restaurant?: boolean | Prisma.RestaurantDefaultArgs<ExtArgs>
   menuCategory?: boolean | Prisma.MenuCategoryDefaultArgs<ExtArgs>
+  restaurant?: boolean | Prisma.RestaurantDefaultArgs<ExtArgs>
 }
 export type ProductIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  restaurant?: boolean | Prisma.RestaurantDefaultArgs<ExtArgs>
   menuCategory?: boolean | Prisma.MenuCategoryDefaultArgs<ExtArgs>
+  restaurant?: boolean | Prisma.RestaurantDefaultArgs<ExtArgs>
 }
 
 export type $ProductPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Product"
   objects: {
     orderProducts: Prisma.$OrderProductPayload<ExtArgs>[]
-    restaurant: Prisma.$RestaurantPayload<ExtArgs>
     menuCategory: Prisma.$MenuCategoryPayload<ExtArgs>
+    restaurant: Prisma.$RestaurantPayload<ExtArgs>
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1410,8 +1410,8 @@ readonly fields: ProductFieldRefs;
 export interface Prisma__ProductClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
   orderProducts<T extends Prisma.Product$orderProductsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Product$orderProductsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$OrderProductPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  restaurant<T extends Prisma.RestaurantDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.RestaurantDefaultArgs<ExtArgs>>): Prisma.Prisma__RestaurantClient<runtime.Types.Result.GetResult<Prisma.$RestaurantPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   menuCategory<T extends Prisma.MenuCategoryDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.MenuCategoryDefaultArgs<ExtArgs>>): Prisma.Prisma__MenuCategoryClient<runtime.Types.Result.GetResult<Prisma.$MenuCategoryPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  restaurant<T extends Prisma.RestaurantDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.RestaurantDefaultArgs<ExtArgs>>): Prisma.Prisma__RestaurantClient<runtime.Types.Result.GetResult<Prisma.$RestaurantPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.

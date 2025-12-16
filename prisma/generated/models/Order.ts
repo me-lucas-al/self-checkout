@@ -40,6 +40,8 @@ export type OrderMinAggregateOutputType = {
   id: number | null
   total: number | null
   restaurantId: string | null
+  customerName: string | null
+  customerCpf: string | null
   status: $Enums.OrderStatus | null
   consumptionMethod: $Enums.ConsumptionMethod | null
   createdAt: Date | null
@@ -50,6 +52,8 @@ export type OrderMaxAggregateOutputType = {
   id: number | null
   total: number | null
   restaurantId: string | null
+  customerName: string | null
+  customerCpf: string | null
   status: $Enums.OrderStatus | null
   consumptionMethod: $Enums.ConsumptionMethod | null
   createdAt: Date | null
@@ -60,6 +64,8 @@ export type OrderCountAggregateOutputType = {
   id: number
   total: number
   restaurantId: number
+  customerName: number
+  customerCpf: number
   status: number
   consumptionMethod: number
   createdAt: number
@@ -82,6 +88,8 @@ export type OrderMinAggregateInputType = {
   id?: true
   total?: true
   restaurantId?: true
+  customerName?: true
+  customerCpf?: true
   status?: true
   consumptionMethod?: true
   createdAt?: true
@@ -92,6 +100,8 @@ export type OrderMaxAggregateInputType = {
   id?: true
   total?: true
   restaurantId?: true
+  customerName?: true
+  customerCpf?: true
   status?: true
   consumptionMethod?: true
   createdAt?: true
@@ -102,6 +112,8 @@ export type OrderCountAggregateInputType = {
   id?: true
   total?: true
   restaurantId?: true
+  customerName?: true
+  customerCpf?: true
   status?: true
   consumptionMethod?: true
   createdAt?: true
@@ -199,6 +211,8 @@ export type OrderGroupByOutputType = {
   id: number
   total: number
   restaurantId: string
+  customerName: string
+  customerCpf: string
   status: $Enums.OrderStatus
   consumptionMethod: $Enums.ConsumptionMethod
   createdAt: Date
@@ -232,24 +246,28 @@ export type OrderWhereInput = {
   id?: Prisma.IntFilter<"Order"> | number
   total?: Prisma.FloatFilter<"Order"> | number
   restaurantId?: Prisma.StringFilter<"Order"> | string
+  customerName?: Prisma.StringFilter<"Order"> | string
+  customerCpf?: Prisma.StringFilter<"Order"> | string
   status?: Prisma.EnumOrderStatusFilter<"Order"> | $Enums.OrderStatus
   consumptionMethod?: Prisma.EnumConsumptionMethodFilter<"Order"> | $Enums.ConsumptionMethod
   createdAt?: Prisma.DateTimeFilter<"Order"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Order"> | Date | string
-  orderProducts?: Prisma.OrderProductListRelationFilter
   restaurant?: Prisma.XOR<Prisma.RestaurantScalarRelationFilter, Prisma.RestaurantWhereInput>
+  orderProducts?: Prisma.OrderProductListRelationFilter
 }
 
 export type OrderOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   total?: Prisma.SortOrder
   restaurantId?: Prisma.SortOrder
+  customerName?: Prisma.SortOrder
+  customerCpf?: Prisma.SortOrder
   status?: Prisma.SortOrder
   consumptionMethod?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
-  orderProducts?: Prisma.OrderProductOrderByRelationAggregateInput
   restaurant?: Prisma.RestaurantOrderByWithRelationInput
+  orderProducts?: Prisma.OrderProductOrderByRelationAggregateInput
 }
 
 export type OrderWhereUniqueInput = Prisma.AtLeast<{
@@ -259,18 +277,22 @@ export type OrderWhereUniqueInput = Prisma.AtLeast<{
   NOT?: Prisma.OrderWhereInput | Prisma.OrderWhereInput[]
   total?: Prisma.FloatFilter<"Order"> | number
   restaurantId?: Prisma.StringFilter<"Order"> | string
+  customerName?: Prisma.StringFilter<"Order"> | string
+  customerCpf?: Prisma.StringFilter<"Order"> | string
   status?: Prisma.EnumOrderStatusFilter<"Order"> | $Enums.OrderStatus
   consumptionMethod?: Prisma.EnumConsumptionMethodFilter<"Order"> | $Enums.ConsumptionMethod
   createdAt?: Prisma.DateTimeFilter<"Order"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Order"> | Date | string
-  orderProducts?: Prisma.OrderProductListRelationFilter
   restaurant?: Prisma.XOR<Prisma.RestaurantScalarRelationFilter, Prisma.RestaurantWhereInput>
+  orderProducts?: Prisma.OrderProductListRelationFilter
 }, "id">
 
 export type OrderOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   total?: Prisma.SortOrder
   restaurantId?: Prisma.SortOrder
+  customerName?: Prisma.SortOrder
+  customerCpf?: Prisma.SortOrder
   status?: Prisma.SortOrder
   consumptionMethod?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -289,6 +311,8 @@ export type OrderScalarWhereWithAggregatesInput = {
   id?: Prisma.IntWithAggregatesFilter<"Order"> | number
   total?: Prisma.FloatWithAggregatesFilter<"Order"> | number
   restaurantId?: Prisma.StringWithAggregatesFilter<"Order"> | string
+  customerName?: Prisma.StringWithAggregatesFilter<"Order"> | string
+  customerCpf?: Prisma.StringWithAggregatesFilter<"Order"> | string
   status?: Prisma.EnumOrderStatusWithAggregatesFilter<"Order"> | $Enums.OrderStatus
   consumptionMethod?: Prisma.EnumConsumptionMethodWithAggregatesFilter<"Order"> | $Enums.ConsumptionMethod
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Order"> | Date | string
@@ -297,18 +321,22 @@ export type OrderScalarWhereWithAggregatesInput = {
 
 export type OrderCreateInput = {
   total: number
+  customerName: string
+  customerCpf: string
   status?: $Enums.OrderStatus
   consumptionMethod?: $Enums.ConsumptionMethod
   createdAt?: Date | string
   updatedAt?: Date | string
-  orderProducts?: Prisma.OrderProductCreateNestedManyWithoutOrderInput
   restaurant: Prisma.RestaurantCreateNestedOneWithoutOrdersInput
+  orderProducts?: Prisma.OrderProductCreateNestedManyWithoutOrderInput
 }
 
 export type OrderUncheckedCreateInput = {
   id?: number
   total: number
   restaurantId: string
+  customerName: string
+  customerCpf: string
   status?: $Enums.OrderStatus
   consumptionMethod?: $Enums.ConsumptionMethod
   createdAt?: Date | string
@@ -318,18 +346,22 @@ export type OrderUncheckedCreateInput = {
 
 export type OrderUpdateInput = {
   total?: Prisma.FloatFieldUpdateOperationsInput | number
+  customerName?: Prisma.StringFieldUpdateOperationsInput | string
+  customerCpf?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus
   consumptionMethod?: Prisma.EnumConsumptionMethodFieldUpdateOperationsInput | $Enums.ConsumptionMethod
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  orderProducts?: Prisma.OrderProductUpdateManyWithoutOrderNestedInput
   restaurant?: Prisma.RestaurantUpdateOneRequiredWithoutOrdersNestedInput
+  orderProducts?: Prisma.OrderProductUpdateManyWithoutOrderNestedInput
 }
 
 export type OrderUncheckedUpdateInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   total?: Prisma.FloatFieldUpdateOperationsInput | number
   restaurantId?: Prisma.StringFieldUpdateOperationsInput | string
+  customerName?: Prisma.StringFieldUpdateOperationsInput | string
+  customerCpf?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus
   consumptionMethod?: Prisma.EnumConsumptionMethodFieldUpdateOperationsInput | $Enums.ConsumptionMethod
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -341,6 +373,8 @@ export type OrderCreateManyInput = {
   id?: number
   total: number
   restaurantId: string
+  customerName: string
+  customerCpf: string
   status?: $Enums.OrderStatus
   consumptionMethod?: $Enums.ConsumptionMethod
   createdAt?: Date | string
@@ -349,6 +383,8 @@ export type OrderCreateManyInput = {
 
 export type OrderUpdateManyMutationInput = {
   total?: Prisma.FloatFieldUpdateOperationsInput | number
+  customerName?: Prisma.StringFieldUpdateOperationsInput | string
+  customerCpf?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus
   consumptionMethod?: Prisma.EnumConsumptionMethodFieldUpdateOperationsInput | $Enums.ConsumptionMethod
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -359,6 +395,8 @@ export type OrderUncheckedUpdateManyInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   total?: Prisma.FloatFieldUpdateOperationsInput | number
   restaurantId?: Prisma.StringFieldUpdateOperationsInput | string
+  customerName?: Prisma.StringFieldUpdateOperationsInput | string
+  customerCpf?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus
   consumptionMethod?: Prisma.EnumConsumptionMethodFieldUpdateOperationsInput | $Enums.ConsumptionMethod
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -379,6 +417,8 @@ export type OrderCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   total?: Prisma.SortOrder
   restaurantId?: Prisma.SortOrder
+  customerName?: Prisma.SortOrder
+  customerCpf?: Prisma.SortOrder
   status?: Prisma.SortOrder
   consumptionMethod?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -394,6 +434,8 @@ export type OrderMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   total?: Prisma.SortOrder
   restaurantId?: Prisma.SortOrder
+  customerName?: Prisma.SortOrder
+  customerCpf?: Prisma.SortOrder
   status?: Prisma.SortOrder
   consumptionMethod?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -404,6 +446,8 @@ export type OrderMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   total?: Prisma.SortOrder
   restaurantId?: Prisma.SortOrder
+  customerName?: Prisma.SortOrder
+  customerCpf?: Prisma.SortOrder
   status?: Prisma.SortOrder
   consumptionMethod?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -494,6 +538,8 @@ export type OrderUpdateOneRequiredWithoutOrderProductsNestedInput = {
 
 export type OrderCreateWithoutRestaurantInput = {
   total: number
+  customerName: string
+  customerCpf: string
   status?: $Enums.OrderStatus
   consumptionMethod?: $Enums.ConsumptionMethod
   createdAt?: Date | string
@@ -504,6 +550,8 @@ export type OrderCreateWithoutRestaurantInput = {
 export type OrderUncheckedCreateWithoutRestaurantInput = {
   id?: number
   total: number
+  customerName: string
+  customerCpf: string
   status?: $Enums.OrderStatus
   consumptionMethod?: $Enums.ConsumptionMethod
   createdAt?: Date | string
@@ -544,6 +592,8 @@ export type OrderScalarWhereInput = {
   id?: Prisma.IntFilter<"Order"> | number
   total?: Prisma.FloatFilter<"Order"> | number
   restaurantId?: Prisma.StringFilter<"Order"> | string
+  customerName?: Prisma.StringFilter<"Order"> | string
+  customerCpf?: Prisma.StringFilter<"Order"> | string
   status?: Prisma.EnumOrderStatusFilter<"Order"> | $Enums.OrderStatus
   consumptionMethod?: Prisma.EnumConsumptionMethodFilter<"Order"> | $Enums.ConsumptionMethod
   createdAt?: Prisma.DateTimeFilter<"Order"> | Date | string
@@ -552,6 +602,8 @@ export type OrderScalarWhereInput = {
 
 export type OrderCreateWithoutOrderProductsInput = {
   total: number
+  customerName: string
+  customerCpf: string
   status?: $Enums.OrderStatus
   consumptionMethod?: $Enums.ConsumptionMethod
   createdAt?: Date | string
@@ -563,6 +615,8 @@ export type OrderUncheckedCreateWithoutOrderProductsInput = {
   id?: number
   total: number
   restaurantId: string
+  customerName: string
+  customerCpf: string
   status?: $Enums.OrderStatus
   consumptionMethod?: $Enums.ConsumptionMethod
   createdAt?: Date | string
@@ -587,6 +641,8 @@ export type OrderUpdateToOneWithWhereWithoutOrderProductsInput = {
 
 export type OrderUpdateWithoutOrderProductsInput = {
   total?: Prisma.FloatFieldUpdateOperationsInput | number
+  customerName?: Prisma.StringFieldUpdateOperationsInput | string
+  customerCpf?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus
   consumptionMethod?: Prisma.EnumConsumptionMethodFieldUpdateOperationsInput | $Enums.ConsumptionMethod
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -598,6 +654,8 @@ export type OrderUncheckedUpdateWithoutOrderProductsInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   total?: Prisma.FloatFieldUpdateOperationsInput | number
   restaurantId?: Prisma.StringFieldUpdateOperationsInput | string
+  customerName?: Prisma.StringFieldUpdateOperationsInput | string
+  customerCpf?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus
   consumptionMethod?: Prisma.EnumConsumptionMethodFieldUpdateOperationsInput | $Enums.ConsumptionMethod
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -607,6 +665,8 @@ export type OrderUncheckedUpdateWithoutOrderProductsInput = {
 export type OrderCreateManyRestaurantInput = {
   id?: number
   total: number
+  customerName: string
+  customerCpf: string
   status?: $Enums.OrderStatus
   consumptionMethod?: $Enums.ConsumptionMethod
   createdAt?: Date | string
@@ -615,6 +675,8 @@ export type OrderCreateManyRestaurantInput = {
 
 export type OrderUpdateWithoutRestaurantInput = {
   total?: Prisma.FloatFieldUpdateOperationsInput | number
+  customerName?: Prisma.StringFieldUpdateOperationsInput | string
+  customerCpf?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus
   consumptionMethod?: Prisma.EnumConsumptionMethodFieldUpdateOperationsInput | $Enums.ConsumptionMethod
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -625,6 +687,8 @@ export type OrderUpdateWithoutRestaurantInput = {
 export type OrderUncheckedUpdateWithoutRestaurantInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   total?: Prisma.FloatFieldUpdateOperationsInput | number
+  customerName?: Prisma.StringFieldUpdateOperationsInput | string
+  customerCpf?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus
   consumptionMethod?: Prisma.EnumConsumptionMethodFieldUpdateOperationsInput | $Enums.ConsumptionMethod
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -635,6 +699,8 @@ export type OrderUncheckedUpdateWithoutRestaurantInput = {
 export type OrderUncheckedUpdateManyWithoutRestaurantInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   total?: Prisma.FloatFieldUpdateOperationsInput | number
+  customerName?: Prisma.StringFieldUpdateOperationsInput | string
+  customerCpf?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus
   consumptionMethod?: Prisma.EnumConsumptionMethodFieldUpdateOperationsInput | $Enums.ConsumptionMethod
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -676,12 +742,14 @@ export type OrderSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   id?: boolean
   total?: boolean
   restaurantId?: boolean
+  customerName?: boolean
+  customerCpf?: boolean
   status?: boolean
   consumptionMethod?: boolean
   createdAt?: boolean
   updatedAt?: boolean
-  orderProducts?: boolean | Prisma.Order$orderProductsArgs<ExtArgs>
   restaurant?: boolean | Prisma.RestaurantDefaultArgs<ExtArgs>
+  orderProducts?: boolean | Prisma.Order$orderProductsArgs<ExtArgs>
   _count?: boolean | Prisma.OrderCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["order"]>
 
@@ -689,6 +757,8 @@ export type OrderSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensi
   id?: boolean
   total?: boolean
   restaurantId?: boolean
+  customerName?: boolean
+  customerCpf?: boolean
   status?: boolean
   consumptionMethod?: boolean
   createdAt?: boolean
@@ -700,6 +770,8 @@ export type OrderSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensi
   id?: boolean
   total?: boolean
   restaurantId?: boolean
+  customerName?: boolean
+  customerCpf?: boolean
   status?: boolean
   consumptionMethod?: boolean
   createdAt?: boolean
@@ -711,16 +783,18 @@ export type OrderSelectScalar = {
   id?: boolean
   total?: boolean
   restaurantId?: boolean
+  customerName?: boolean
+  customerCpf?: boolean
   status?: boolean
   consumptionMethod?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type OrderOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "total" | "restaurantId" | "status" | "consumptionMethod" | "createdAt" | "updatedAt", ExtArgs["result"]["order"]>
+export type OrderOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "total" | "restaurantId" | "customerName" | "customerCpf" | "status" | "consumptionMethod" | "createdAt" | "updatedAt", ExtArgs["result"]["order"]>
 export type OrderInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  orderProducts?: boolean | Prisma.Order$orderProductsArgs<ExtArgs>
   restaurant?: boolean | Prisma.RestaurantDefaultArgs<ExtArgs>
+  orderProducts?: boolean | Prisma.Order$orderProductsArgs<ExtArgs>
   _count?: boolean | Prisma.OrderCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type OrderIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -733,13 +807,15 @@ export type OrderIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extens
 export type $OrderPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Order"
   objects: {
-    orderProducts: Prisma.$OrderProductPayload<ExtArgs>[]
     restaurant: Prisma.$RestaurantPayload<ExtArgs>
+    orderProducts: Prisma.$OrderProductPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
     total: number
     restaurantId: string
+    customerName: string
+    customerCpf: string
     status: $Enums.OrderStatus
     consumptionMethod: $Enums.ConsumptionMethod
     createdAt: Date
@@ -1138,8 +1214,8 @@ readonly fields: OrderFieldRefs;
  */
 export interface Prisma__OrderClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  orderProducts<T extends Prisma.Order$orderProductsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Order$orderProductsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$OrderProductPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   restaurant<T extends Prisma.RestaurantDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.RestaurantDefaultArgs<ExtArgs>>): Prisma.Prisma__RestaurantClient<runtime.Types.Result.GetResult<Prisma.$RestaurantPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  orderProducts<T extends Prisma.Order$orderProductsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Order$orderProductsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$OrderProductPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1172,6 +1248,8 @@ export interface OrderFieldRefs {
   readonly id: Prisma.FieldRef<"Order", 'Int'>
   readonly total: Prisma.FieldRef<"Order", 'Float'>
   readonly restaurantId: Prisma.FieldRef<"Order", 'String'>
+  readonly customerName: Prisma.FieldRef<"Order", 'String'>
+  readonly customerCpf: Prisma.FieldRef<"Order", 'String'>
   readonly status: Prisma.FieldRef<"Order", 'OrderStatus'>
   readonly consumptionMethod: Prisma.FieldRef<"Order", 'ConsumptionMethod'>
   readonly createdAt: Prisma.FieldRef<"Order", 'DateTime'>

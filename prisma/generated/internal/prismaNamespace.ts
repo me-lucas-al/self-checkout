@@ -821,11 +821,11 @@ export const RestaurantScalarFieldEnum = {
   id: 'id',
   name: 'name',
   slug: 'slug',
-  description: 'description',
   avatarImageUrl: 'avatarImageUrl',
   coverImageUrl: 'coverImageUrl',
   createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
+  updatedAt: 'updatedAt',
+  description: 'description'
 } as const
 
 export type RestaurantScalarFieldEnum = (typeof RestaurantScalarFieldEnum)[keyof typeof RestaurantScalarFieldEnum]
@@ -862,6 +862,8 @@ export const OrderScalarFieldEnum = {
   id: 'id',
   total: 'total',
   restaurantId: 'restaurantId',
+  customerName: 'customerName',
+  customerCpf: 'customerCpf',
   status: 'status',
   consumptionMethod: 'consumptionMethod',
   createdAt: 'createdAt',
