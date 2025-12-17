@@ -4,6 +4,7 @@ import { db } from '@/lib/prisma';
 import { removeCpfPunctuation } from '@/lib/validate-cpf';
 
 import { ConsumptionMethod } from '../../../prisma/generated/enums';
+import { redirect } from 'next/navigation';
 
 interface CreateOrderInput {
   customerName: string;
@@ -54,4 +55,5 @@ export async function createOrder(input: CreateOrderInput) {
       }, 0),
     },
   });
+  redirect(`/${input.slug}/orders`);
 }

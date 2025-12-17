@@ -16,8 +16,8 @@ interface CartItemProps {
 export function CartProductItem({ product }: CartItemProps) {
   const { decreaseProductQuantity, increaseProductQuantity, removeProduct } = useContext(CartContext);
   return (
-    <div className="-mt-5 flex w-full items-center gap-2">
-      <div className="ml-2 flex items-center gap-3">
+    <div className="flex w-full items-center gap-2">
+      <div className="ml-2 flex flex-1 items-center gap-3">
         <div className="relative h-20 w-20 shrink-0 rounded-xl bg-gray-100">
           <Image src={product.imageUrl} alt={product.name} fill />
         </div>
@@ -48,7 +48,7 @@ export function CartProductItem({ product }: CartItemProps) {
         </div>
       </div>
       <Button
-        className="h-7 w-7 shrink-0 cursor-pointer rounded-lg p-0"
+       className="ml-auto h-7 w-7 shrink-0 cursor-pointer rounded-lg mr-4"
         variant="outline"
         onClick={() => removeProduct(product.id)}
       >

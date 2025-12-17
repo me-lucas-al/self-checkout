@@ -31,7 +31,6 @@ import {
   FormMessage,
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
-import { cn } from '@/lib/utils';
 import { validateCPF } from '@/lib/validate-cpf';
 
 import { ConsumptionMethod } from '../../../../../prisma/generated/enums';
@@ -94,7 +93,7 @@ export function FinishOrderDrawer({
     }
   };
   return (
-    <Drawer>
+    <Drawer open={open} onOpenChange={onOpenChange}>
       <DrawerTrigger asChild>{children}</DrawerTrigger>
       <DrawerContent>
         <DrawerHeader>
@@ -103,9 +102,9 @@ export function FinishOrderDrawer({
             Insira as suas informações abaixo para finalizar o pedido
           </DrawerDescription>
         </DrawerHeader>
-        <div className="p-5 lg:m-auto lg:mr-8 lg:w-6xl">
+        <div className="p-5 lg:flex lg:justify-center">
           <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+            <form onSubmit={form.handleSubmit(onSubmit)} className="w-full max-w-md space-y-4">
               <FormField
                 control={form.control}
                 name="name"
@@ -114,7 +113,6 @@ export function FinishOrderDrawer({
                     <FormLabel>Nome</FormLabel>
                     <FormControl>
                       <Input
-                        className="lg:w-[40%]"
                         placeholder="Digite seu nome..."
                         {...field}
                       />
@@ -143,7 +141,7 @@ export function FinishOrderDrawer({
               />
               <DrawerFooter>
                 <Button
-                  className="w-full cursor-pointer rounded-full lg:w-[40%]"
+                  className="w-full cursor-pointer rounded-full"
                   type="submit"
                   disabled={isPending}
                 >
@@ -152,7 +150,7 @@ export function FinishOrderDrawer({
                 </Button>
                 <DrawerClose asChild>
                   <Button
-                    className="w-full cursor-pointer rounded-full lg:w-[40%]"
+                    className="w-full cursor-pointer rounded-full "
                     variant="outline"
                   >
                     Cancelar
