@@ -28,7 +28,7 @@ export default function OrderItem({ orders }: OrderListProps) {
             >
               {getStatusLabel(order.status)}
             </div>
-            <div className="flex items-center gap-2">
+            <div className="flex flex-wrap items-center gap-2">
               <div className="relative h-5 w-5">
                 <Image
                   src={order.restaurant.avatarImageUrl}
