@@ -5,7 +5,7 @@ import { Button } from '@/components/ui/button';
 import { Prisma } from '../../../../../prisma/generated/client';
 import OrderItem from './order-item';
 
-export interface OrderListProps {
+export interface OrderProps {
   orders: Array<
     Prisma.OrderGetPayload<{
       include: {
@@ -25,7 +25,7 @@ export interface OrderListProps {
   >;
 }
 
-export default function OrderList({ orders }: OrderListProps) {
+export default function OrderList({ orders }: OrderProps) {
   return (
     <div className="space-y-6 p-6">
       <Button size="icon" variant="secondary" className="rounded-full">

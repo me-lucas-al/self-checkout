@@ -5,7 +5,7 @@ import { Separator } from '@/components/ui/separator';
 import { formatCurrencyBRL } from '@/lib/format-currency';
 
 import { OrderStatus } from '../../../../../prisma/generated/enums';
-import { OrderListProps } from './order-list';
+import { OrderProps } from './order-list';
 
 const getStatusLabel = (status: OrderStatus) => {
   switch (status) {
@@ -17,14 +17,14 @@ const getStatusLabel = (status: OrderStatus) => {
       return 'Finalizado';
   }
 };
-export default function OrderItem({ orders }: OrderListProps) {
+export default function OrderItem({ orders }: OrderProps) {
   return (
     <>
       {orders.map((order) => (
         <Card key={order.id}>
           <CardContent className="space-y-4 p-5">
             <div
-              className={`w-fit rounded-full px-2 py-1 text-xs font-semibold text-white ${order.status === OrderStatus.FINISHED ? 'bg-green-500 text-white' : 'bg-gray-200 text-gray-500'} `}
+              className={`w-fit rounded-full px-2 py-1 text-xs font-semibold text-white ${order.status === OrderStatus.FINISHED ? 'bg-green-500 text-white' : 'bg-gray-400 text-gray-500'} `}
             >
               {getStatusLabel(order.status)}
             </div>
