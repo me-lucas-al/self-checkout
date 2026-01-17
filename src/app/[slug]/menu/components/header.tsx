@@ -2,14 +2,14 @@
 
 import { useEffect, useState } from 'react';
 
-import NextImage  from 'next/image';
-import { useRouter } from 'next/navigation';
-import  ColorThief  from "colorthief";
+import NextImage from 'next/image';
+import { useParams, useRouter } from 'next/navigation';
+
+import { Restaurant } from '@prisma/generated/client';
+import ColorThief from 'colorthief';
 import { ChevronLeftIcon, ScrollTextIcon } from 'lucide-react';
 
 import { Button } from '@/components/ui/button';
-
-import { Restaurant } from '@prisma/generated/client';
 
 interface RestaurantHeaderProps {
   restaurant: Pick<Restaurant, 'name' | 'coverImageUrl' | 'avatarImageUrl'>;
@@ -18,15 +18,16 @@ interface RestaurantHeaderProps {
 export default function RestaurantHeader({
   restaurant,
 }: RestaurantHeaderProps) {
+  const { slug } = useParams<{ slug: string }>();
   const router = useRouter();
-   const [bgColor, setBgColor] = useState<string>("");
+  const [bgColor, setBgColor] = useState<string>('');
 
   const colorThief = new ColorThief();
 
   async function getAvgColor(restaurant: Pick<Restaurant, 'avatarImageUrl'>) {
     try {
       const img = new window.Image();
-      img.crossOrigin = "anonymous";
+      img.crossOrigin = 'anonymous';
       img.src = restaurant.avatarImageUrl;
 
       img.onload = () => {
@@ -34,7 +35,6 @@ export default function RestaurantHeader({
         const [r, g, b] = colorThief.getColor(img);
         setBgColor(`rgba(${r}, ${g}, ${b}, 1)`);
       };
-
     } catch (e) {
       console.error(e);
     }
@@ -56,7 +56,7 @@ export default function RestaurantHeader({
       </Button>
       <div className="relative mx-auto mb-2 h-[250px] w-full overflow-hidden md:h-[300px] lg:h-[250px]">
         <div className="lg:hidden">
-          <NextImage 
+          <NextImage
             src={restaurant.coverImageUrl}
             alt={restaurant.name}
             fill
@@ -75,8 +75,12 @@ export default function RestaurantHeader({
       <Button
         variant="secondary"
         size="icon"
-        className="absolute top-4 right-4 z-50 rounded-full hover:cursor-pointer">
-          <ScrollTextIcon />
+        className="absolute top-4 right-4 z-50 rounded-full hover:cursor-pointer"
+        onClick={() => {
+          router.push(`/${slug}/orders`);
+        }}
+      >
+        <ScrollTextIcon />
       </Button>
     </div>
   );
