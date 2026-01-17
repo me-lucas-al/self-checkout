@@ -2,7 +2,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useParams, useSearchParams } from 'next/navigation';
 
-import { Product } from '../../../../../prisma/generated/client';
+import { Product } from '@prisma/generated/client';
 import { formatCurrencyBRL } from '@/lib/format-currency';
 
 interface ProductsProps {

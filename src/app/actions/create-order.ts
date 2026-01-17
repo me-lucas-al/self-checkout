@@ -3,7 +3,7 @@
 import { db } from '@/lib/prisma';
 import { removeCpfPunctuation } from '@/lib/validate-cpf';
 
-import { ConsumptionMethod } from '../../../prisma/generated/enums';
+import { ConsumptionMethod } from '@prisma/generated/enums';
 import { redirect } from 'next/navigation';
 
 interface CreateOrderInput {

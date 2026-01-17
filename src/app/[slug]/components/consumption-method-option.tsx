@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 
-import { ConsumptionMethod } from '../../../../prisma/generated/enums';
+import { ConsumptionMethod } from '@prisma/generated/enums';
 import { Button } from '../../../components/ui/button';
 import { Card, CardContent } from '../../../components/ui/card';
 

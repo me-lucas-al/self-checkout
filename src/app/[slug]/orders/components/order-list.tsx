@@ -2,7 +2,7 @@ import { ChevronLeftIcon, ScrollTextIcon } from 'lucide-react';
 
 import { Button } from '@/components/ui/button';
 
-import { Prisma } from '../../../../../prisma/generated/client';
+import { Prisma } from '@prisma/generated/client';
 import OrderItem from './order-item';
 
 export interface OrderProps {

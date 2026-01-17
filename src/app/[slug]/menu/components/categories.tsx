@@ -9,7 +9,7 @@ import { Button } from '@/components/ui/button';
 import { ScrollArea, ScrollBar } from '@/components/ui/scroll-area';
 import { formatCurrencyBRL } from '@/lib/format-currency';
 
-import { Prisma } from '../../../../../prisma/generated/client';
+import { Prisma } from '@prisma/generated/client';
 import { CartContext } from '../contexts/cart';
 import Products from './products';
 import { CartSheet } from './cart-sheet';

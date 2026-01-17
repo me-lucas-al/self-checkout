@@ -7,7 +7,7 @@ import { ChevronLeftIcon, ScrollTextIcon } from 'lucide-react';
 
 import { Button } from '@/components/ui/button';
 
-import { Product } from '../../../../../../prisma/generated/client';
+import { Product } from '@prisma/generated/client';
 
 interface ProductHeaderProps {
   product: Pick<Product, 'name' | 'imageUrl'>;

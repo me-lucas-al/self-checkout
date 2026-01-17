@@ -33,7 +33,7 @@ import {
 import { Input } from '@/components/ui/input';
 import { validateCPF } from '@/lib/validate-cpf';
 
-import { ConsumptionMethod } from '../../../../../prisma/generated/enums';
+import { ConsumptionMethod } from '@prisma/generated/enums';
 import { CartContext } from '../contexts/cart';
 
 const formSchema = z.object({

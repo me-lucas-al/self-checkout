@@ -4,7 +4,7 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Separator } from '@/components/ui/separator';
 import { formatCurrencyBRL } from '@/lib/format-currency';
 
-import { OrderStatus } from '../../../../../prisma/generated/enums';
+import { OrderStatus } from '@prisma/generated/enums';
 import { OrderProps } from './order-list';
 
 const getStatusLabel = (status: OrderStatus) => {

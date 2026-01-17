@@ -9,7 +9,7 @@ import { ChevronLeftIcon, ScrollTextIcon } from 'lucide-react';
 
 import { Button } from '@/components/ui/button';
 
-import { Restaurant } from '../../../../../prisma/generated/client';
+import { Restaurant } from '@prisma/generated/client';
 
 interface RestaurantHeaderProps {
   restaurant: Pick<Restaurant, 'name' | 'coverImageUrl' | 'avatarImageUrl'>;
