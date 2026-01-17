@@ -4,6 +4,7 @@ import { db } from '@/lib/prisma';
 import { removeCpfPunctuation } from '@/lib/validate-cpf';
 
 import { ConsumptionMethod } from '@prisma/generated/enums';
+import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
 
 interface CreateOrderInput {
@@ -55,5 +56,6 @@ export async function createOrder(input: CreateOrderInput) {
       }, 0),
     },
   });
-  redirect(`/${input.slug}/orders`);
+  revalidatePath(`/${input.slug}/orders`);
+  redirect(`/${input.slug}/orders?cpf=${removeCpfPunctuation(input.customerCpf)}`);
 }
