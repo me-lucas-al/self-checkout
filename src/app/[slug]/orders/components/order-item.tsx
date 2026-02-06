@@ -15,6 +15,8 @@ const getStatusLabel = (status: OrderStatus) => {
       return 'Em preparo';
     case OrderStatus.FINISHED:
       return 'Finalizado';
+    case OrderStatus.PAYMENT_CONFIRMED:
+      return 'Pagamento confirmado';
   }
 };
 export default function OrderItem({ orders }: OrderProps) {
