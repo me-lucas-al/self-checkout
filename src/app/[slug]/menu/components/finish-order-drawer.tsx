@@ -6,11 +6,13 @@ import { PatternFormat } from 'react-number-format';
 import { useParams, useSearchParams } from 'next/navigation';
 
 import { zodResolver } from '@hookform/resolvers/zod';
+import { ConsumptionMethod } from '@prisma/generated/enums';
+import { loadStripe } from '@stripe/stripe-js';
 import { Loader2Icon } from 'lucide-react';
 import { toast } from 'sonner';
 import { z } from 'zod';
 
-import { createOrder } from '@/app/actions/create-order';
+import { createOrder } from '@/app/[slug]/actions/create-order';
 import { Button } from '@/components/ui/button';
 import {
   Drawer,
@@ -33,7 +35,7 @@ import {
 import { Input } from '@/components/ui/input';
 import { validateCPF } from '@/lib/validate-cpf';
 
-import { ConsumptionMethod } from '@prisma/generated/enums';
+import { createStripeCheckout } from '../../actions/create-stripe-checkout';
 import { CartContext } from '../contexts/cart';
 
 const formSchema = z.object({
@@ -64,6 +66,7 @@ export function FinishOrderDrawer({
   const consumptionMethod = searchParams.get(
     'consumptionMethod'
   ) as ConsumptionMethod;
+  const stripePublicKey = process.env.NEXT_PUBLIC_STRIPE_PUBLIC_KEY;
 
   const form = useForm<FormSchema>({
     resolver: zodResolver(formSchema),
@@ -76,7 +79,6 @@ export function FinishOrderDrawer({
 
   const onSubmit = async (data: FormSchema) => {
     try {
-      startTransition(async () => {
         await createOrder({
           consumptionMethod: consumptionMethod,
           customerCpf: data.cpf,
@@ -84,12 +86,21 @@ export function FinishOrderDrawer({
           products,
           slug,
         });
+        if (!stripePublicKey) {
+          throw new Error('Stripe public key is not defined.');
+        }
+        const { sessionId, sessionUrl } = await createStripeCheckout({
+          products,
+        });
+        if (sessionUrl) {
+          window.location.href = sessionUrl;
+        } else {
+          toast.error('Erro ao criar sessão de pagamento.');
+        }
 
-        onOpenChange(false);
-        toast.success('Pedido criado com sucesso!');
-      });
     } catch (error) {
       console.error('Erro ao criar o pedido:', error);
+      toast.error('Erro ao criar o pedido.');
     }
   };
   return (
@@ -104,7 +115,10 @@ export function FinishOrderDrawer({
         </DrawerHeader>
         <div className="p-5 lg:flex lg:justify-center">
           <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)} className="w-full max-w-md space-y-4">
+            <form
+              onSubmit={form.handleSubmit(onSubmit)}
+              className="w-full max-w-md space-y-4"
+            >
               <FormField
                 control={form.control}
                 name="name"
@@ -112,10 +126,7 @@ export function FinishOrderDrawer({
                   <FormItem>
                     <FormLabel>Nome</FormLabel>
                     <FormControl>
-                      <Input
-                        placeholder="Digite seu nome..."
-                        {...field}
-                      />
+                      <Input placeholder="Digite seu nome..." {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -150,7 +161,7 @@ export function FinishOrderDrawer({
                 </Button>
                 <DrawerClose asChild>
                   <Button
-                    className="w-full cursor-pointer rounded-full "
+                    className="w-full cursor-pointer rounded-full"
                     variant="outline"
                   >
                     Cancelar
