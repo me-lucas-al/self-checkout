@@ -17,6 +17,8 @@ const getStatusLabel = (status: OrderStatus) => {
       return 'Finalizado';
     case OrderStatus.PAYMENT_CONFIRMED:
       return 'Pagamento confirmado';
+    case OrderStatus.PAYMENT_FAILED:
+      return 'Pagamento falhou';
   }
 };
 export default function OrderItem({ orders }: OrderProps) {
