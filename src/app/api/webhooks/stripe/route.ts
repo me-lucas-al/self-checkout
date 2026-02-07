@@ -23,7 +23,7 @@ export async function POST(req: Request) {
                 id: Number(orderId),
             },
             data: {
-                status: 'PAYMENT_CONFIRMED',
+                status: 'PA\ppYMENT_CONFIRMED',
             },
         })
     }

@@ -5,8 +5,6 @@ import { removeCpfPunctuation } from '@/lib/validate-cpf';
 
 import { ConsumptionMethod } from '@prisma/generated/enums';
 import { revalidatePath } from 'next/cache';
-import { redirect } from 'next/navigation';
-
 interface CreateOrderInput {
   customerName: string;
   customerCpf: string;
@@ -39,7 +37,7 @@ export async function createOrder(input: CreateOrderInput) {
     quantity: product.quantity,
     price: productsWithPrices.find((p) => p.id === product.id)!.price,
   }));
-  await db.order.create({
+  const order = await db.order.create({
     data: {
       customerName: input.customerName,
       customerCpf: removeCpfPunctuation(input.customerCpf),
@@ -57,4 +55,5 @@ export async function createOrder(input: CreateOrderInput) {
     },
   });
   revalidatePath(`/${input.slug}/orders`);
+  return order;
 }

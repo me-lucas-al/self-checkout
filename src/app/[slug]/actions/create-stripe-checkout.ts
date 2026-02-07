@@ -8,9 +8,11 @@ import { CartProduct } from '../menu/contexts/cart';
 
 interface CreateStripeCheckoutInput {
   products: CartProduct[];
+  orderId: number ;
 }
 export async function createStripeCheckout({
   products,
+  orderId
 }: CreateStripeCheckoutInput) {
   try {
     const reqHeaders = await headers();
@@ -35,6 +37,9 @@ export async function createStripeCheckout({
         },
         quantity: product.quantity,
       })),
+      metadata: {
+        orderId: orderId.toString(),
+      },
     });
     return { sessionId: session.id, sessionUrl: session.url };
   } catch (error) {

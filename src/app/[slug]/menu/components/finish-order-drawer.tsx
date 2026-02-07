@@ -79,7 +79,7 @@ export function FinishOrderDrawer({
 
   const onSubmit = async (data: FormSchema) => {
     try {
-        await createOrder({
+        const order =await createOrder({
           consumptionMethod: consumptionMethod,
           customerCpf: data.cpf,
           customerName: data.name,
@@ -91,6 +91,7 @@ export function FinishOrderDrawer({
         }
         const { sessionId, sessionUrl } = await createStripeCheckout({
           products,
+          orderId: order.id,
         });
         if (sessionUrl) {
           window.location.href = sessionUrl;
