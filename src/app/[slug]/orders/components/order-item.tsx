@@ -28,7 +28,7 @@ export default function OrderItem({ orders }: OrderProps) {
         <Card key={order.id}>
           <CardContent className="space-y-4 p-5">
             <div
-              className={`w-fit rounded-full px-2 py-1 text-xs font-semibold text-white ${order.status === OrderStatus.FINISHED || order.status === OrderStatus.PAYMENT_CONFIRMED ? 'bg-green-500 text-white' : 'bg-gray-400 text-gray-500'} `}
+              className={`w-fit rounded-full px-2 py-1 text-xs font-semibold text-white ${(order.status === OrderStatus.FINISHED || order.status === OrderStatus.PAYMENT_CONFIRMED) ? 'bg-green-500 text-white' : 'bg-gray-400 text-gray-500'} `}
             >
               {getStatusLabel(order.status)}
             </div>
