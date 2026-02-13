@@ -1,5 +1,5 @@
 'use client';
-import { useContext, useTransition } from 'react';
+import { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { PatternFormat } from 'react-number-format';
 
@@ -7,7 +7,6 @@ import { useParams, useSearchParams } from 'next/navigation';
 
 import { zodResolver } from '@hookform/resolvers/zod';
 import { ConsumptionMethod } from '@prisma/generated/enums';
-import { loadStripe } from '@stripe/stripe-js';
 import { Loader2Icon } from 'lucide-react';
 import { toast } from 'sonner';
 import { z } from 'zod';
@@ -61,7 +60,7 @@ export function FinishOrderDrawer({
 }: FinishOrderDrawerProps) {
   const { slug } = useParams<{ slug: string }>();
   const { products } = useContext(CartContext);
-  const [isPending, startTransition] = useTransition();
+  const [isLoading, setIsLoading] = useState(false);
   const searchParams = useSearchParams();
   const consumptionMethod = searchParams.get(
     'consumptionMethod'
@@ -79,6 +78,7 @@ export function FinishOrderDrawer({
 
   const onSubmit = async (data: FormSchema) => {
     try {
+        setIsLoading(true);
         const order =await createOrder({
           consumptionMethod: consumptionMethod,
           customerCpf: data.cpf,
@@ -89,9 +89,12 @@ export function FinishOrderDrawer({
         if (!stripePublicKey) {
           throw new Error('Stripe public key is not defined.');
         }
-        const { sessionId, sessionUrl } = await createStripeCheckout({
+        const { sessionUrl } = await createStripeCheckout({
           products,
           orderId: order.id,
+          slug,
+          consumptionMethod,
+          cpf: data.cpf,
         });
         if (sessionUrl) {
           window.location.href = sessionUrl;
@@ -102,6 +105,8 @@ export function FinishOrderDrawer({
     } catch (error) {
       console.error('Erro ao criar o pedido:', error);
       toast.error('Erro ao criar o pedido.');
+    } finally {
+      setIsLoading(false);
     }
   };
   return (
@@ -155,9 +160,9 @@ export function FinishOrderDrawer({
                 <Button
                   className="w-full cursor-pointer rounded-full"
                   type="submit"
-                  disabled={isPending}
+                  disabled={isLoading}
                 >
-                  {isPending && <Loader2Icon className="animate-spin" />}
+                  {isLoading && <Loader2Icon className="animate-spin" />}
                   Finalizar
                 </Button>
                 <DrawerClose asChild>
