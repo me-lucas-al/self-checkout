@@ -1,13 +1,12 @@
 'use client';
-import { useContext, useState } from 'react';
-import { useForm } from 'react-hook-form';
-import { PatternFormat } from 'react-number-format';
-
-import { useParams, useSearchParams } from 'next/navigation';
 
 import { zodResolver } from '@hookform/resolvers/zod';
 import { ConsumptionMethod } from '@prisma/generated/enums';
 import { Loader2Icon } from 'lucide-react';
+import { useParams, useSearchParams } from 'next/navigation';
+import { useContext, useState } from 'react';
+import { useForm } from 'react-hook-form';
+import { PatternFormat } from 'react-number-format';
 import { toast } from 'sonner';
 import { z } from 'zod';
 
@@ -53,6 +52,7 @@ interface FinishOrderDrawerProps {
   open: boolean;
   onOpenChange: (open: boolean) => void;
 }
+
 export function FinishOrderDrawer({
   children,
   open,
@@ -78,30 +78,32 @@ export function FinishOrderDrawer({
 
   const onSubmit = async (data: FormSchema) => {
     try {
-        setIsLoading(true);
-        const order =await createOrder({
-          consumptionMethod: consumptionMethod,
-          customerCpf: data.cpf,
-          customerName: data.name,
-          products,
-          slug,
-        });
-        if (!stripePublicKey) {
-          throw new Error('Stripe public key is not defined.');
-        }
-        const { sessionUrl } = await createStripeCheckout({
-          products,
-          orderId: order.id,
-          slug,
-          consumptionMethod,
-          cpf: data.cpf,
-        });
-        if (sessionUrl) {
-          window.location.href = sessionUrl;
-        } else {
-          toast.error('Erro ao criar sessão de pagamento.');
-        }
+      setIsLoading(true);
+      const order = await createOrder({
+        consumptionMethod: consumptionMethod,
+        customerCpf: data.cpf,
+        customerName: data.name,
+        products,
+        slug,
+      });
 
+      if (!stripePublicKey) {
+        throw new Error('Stripe public key is not defined.');
+      }
+
+      const { sessionUrl } = await createStripeCheckout({
+        products,
+        orderId: order.id,
+        slug,
+        consumptionMethod,
+        cpf: data.cpf,
+      });
+
+      if (sessionUrl) {
+        window.location.href = sessionUrl;
+      } else {
+        toast.error('Erro ao criar sessão de pagamento.');
+      }
     } catch (error) {
       console.error('Erro ao criar o pedido:', error);
       toast.error('Erro ao criar o pedido.');
@@ -109,35 +111,42 @@ export function FinishOrderDrawer({
       setIsLoading(false);
     }
   };
+
   return (
     <Drawer open={open} onOpenChange={onOpenChange}>
       <DrawerTrigger asChild>{children}</DrawerTrigger>
       <DrawerContent>
-        <DrawerHeader>
+        <DrawerHeader className="text-left">
           <DrawerTitle>Finalizar Pedido</DrawerTitle>
           <DrawerDescription>
-            Insira as suas informações abaixo para finalizar o pedido
+            Insira seus dados para concluir sua compra.
           </DrawerDescription>
         </DrawerHeader>
-        <div className="p-5 lg:flex lg:justify-center">
+        
+        <div className="p-5 max-h-[90vh]">
           <Form {...form}>
             <form
               onSubmit={form.handleSubmit(onSubmit)}
-              className="w-full max-w-md space-y-4"
+              className="w-full max-w-md mx-auto space-y-4"
             >
               <FormField
                 control={form.control}
                 name="name"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Nome</FormLabel>
+                    <FormLabel>Nome Completo</FormLabel>
                     <FormControl>
-                      <Input placeholder="Digite seu nome..." {...field} />
+                      <Input 
+                        placeholder="Digite seu nome..." 
+                        className="h-12 rounded-lg"
+                        {...field} 
+                      />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
                 )}
               />
+              
               <FormField
                 control={form.control}
                 name="cpf"
@@ -147,8 +156,9 @@ export function FinishOrderDrawer({
                     <FormControl>
                       <PatternFormat
                         format="###.###.###-##"
-                        placeholder="Digite seu CPF..."
+                        placeholder="000.000.000-00"
                         customInput={Input}
+                        className="h-12 rounded-lg"
                         {...field}
                       />
                     </FormControl>
@@ -156,18 +166,19 @@ export function FinishOrderDrawer({
                   </FormItem>
                 )}
               />
-              <DrawerFooter>
+              
+              <DrawerFooter className="px-0 pt-4">
                 <Button
-                  className="w-full cursor-pointer rounded-full"
+                  className="w-full h-12 cursor-pointer rounded-full font-semibold"
                   type="submit"
                   disabled={isLoading}
                 >
-                  {isLoading && <Loader2Icon className="animate-spin" />}
-                  Finalizar
+                  {isLoading && <Loader2Icon className="animate-spin mr-2" />}
+                  Finalizar Pedido
                 </Button>
                 <DrawerClose asChild>
                   <Button
-                    className="w-full cursor-pointer rounded-full"
+                    className="w-full h-11 cursor-pointer rounded-full"
                     variant="outline"
                   >
                     Cancelar
