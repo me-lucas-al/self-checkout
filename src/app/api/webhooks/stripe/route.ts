@@ -38,7 +38,7 @@ export async function POST(req: Request) {
             }
         })
         revalidatePath(`/${order.restaurant.slug}/menu`);
-        revalidatePath(`/${order.restaurant.slug}/orders?consumptionMethod=${order.consumptionMethod}?cpf=${order.customerCpf}`);
+        revalidatePath(`/${order.restaurant.slug}/orders?consumptionMethod=${order.consumptionMethod}&cpf=${order.customerCpf}`);
         break;
     }
         case 'charge.failed': {
@@ -60,7 +60,7 @@ export async function POST(req: Request) {
             }
         })
         revalidatePath(`/${order.restaurant.slug}/menu`);
-        revalidatePath(`/${order.restaurant.slug}/orders?consumptionMethod=${order.consumptionMethod}?cpf=${order.customerCpf}`);
+        revalidatePath(`/${order.restaurant.slug}/orders?consumptionMethod=${order.consumptionMethod}&cpf=${order.customerCpf}`);
         break;
     }
     }
