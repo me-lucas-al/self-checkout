@@ -11,7 +11,7 @@ O projeto está online e o deploy pode ser acessado através do seguinte link:
 
 Este projeto é uma **aplicação web de autoatendimento (self-checkout) para restaurantes**, desenvolvida com o objetivo de permitir que clientes realizem pedidos de forma **autônoma**, sem a necessidade de interação direta com atendentes.
 
-A solução funciona como um **cardápio digital interativo**, acessado por meio de um link único do restaurante, onde o cliente escolhe como deseja consumir, seleciona os produtos e finaliza o pedido diretamente pelo navegador.
+A solução funciona como um **cardápio digital interativo**, acessado por meio de um link único do restaurante, onde o cliente escolhe como deseja consumir, seleciona os produtos, realiza o pagamento via Stripe e finaliza o pedido diretamente pelo navegador.
 
 ---
 
@@ -20,7 +20,7 @@ A solução funciona como um **cardápio digital interativo**, acessado por meio
 - Automatizar o processo de pedidos em restaurantes
 - Reduzir filas e tempo de espera
 - Oferecer uma experiência moderna e intuitiva ao cliente
-- Garantir segurança e integridade dos dados no processo de compra
+- Garantir segurança e integridade dos dados no processo de compra e pagamento
 
 ---
 
@@ -37,10 +37,8 @@ A solução funciona como um **cardápio digital interativo**, acessado por meio
    - Nome do cliente
    - CPF (com validação e tratamento dos dados)
 
-6. O pedido é registado na base de dados com:
-   - Cálculo seguro do valor total
-   - Associação aos produtos selecionados
-   - Definição do estado inicial do pedido
+6. O pedido é registado na base de dados e o cliente é redirecionado para o **checkout seguro do Stripe**.
+7. Após o pagamento, o pedido tem seu status atualizado via Webhooks.
 
 ---
 
@@ -49,6 +47,7 @@ A solução funciona como um **cardápio digital interativo**, acessado por meio
 - Cardápio digital por restaurante
 - Organização de produtos por categorias
 - Escolha de método de consumo
+- **Integração com Stripe para processamento seguro de pagamentos**
 - Criação de pedidos via **Server Actions**
 - Validação de formulários com feedback ao utilizador
 - Cálculo seguro de preços no servidor
@@ -74,9 +73,10 @@ O projeto utiliza tecnologias modernas do ecossistema JavaScript/TypeScript:
 - **React Hook Form**
 - **Zod**
 
-### Backend
+### Backend e Integrações
 
 - **Server Actions (Next.js)**
+- **Stripe** (Checkout e Webhooks para pagamentos)
 - **Prisma ORM**
 - **PostgreSQL** (com suporte ao **Neon Serverless**)
 
@@ -113,6 +113,7 @@ O esquema da base de dados foi projetado de forma relacional para garantir integ
 - Nome do cliente
 - CPF
 - Método de consumo
+- Status de pagamento (integrado ao Stripe)
 - Estado do pedido:
   - EM_PREPARAÇÃO
   - FINALIZADO
@@ -128,7 +129,8 @@ O esquema da base de dados foi projetado de forma relacional para garantir integ
 
 ## 🔐 Segurança e Regras de Negócio
 
-- **Revalidação de preços no servidor:** o valor total do pedido é sempre recalculado no backend, evitando manipulação no frontend.
+- **Revalidação de preços no servidor:** o valor total do pedido é sempre recalculado no backend antes de ser enviado ao Stripe, evitando manipulação no frontend.
+- **Webhooks do Stripe:** garantem que o status do pedido só seja atualizado após a confirmação real do pagamento.
 - **Verificação de existência do restaurante** antes da criação do pedido.
 - **Tratamento do CPF:** remoção de pontuação antes do armazenamento na base de dados.
 - **Server Actions:** garantem que toda a lógica sensível execute apenas no servidor.
@@ -143,6 +145,7 @@ O esquema da base de dados foi projetado de forma relacional para garantir integ
   - Validação de dados
   - Regras de negócio
   - Persistência
+  - Webhooks e Integrações Externas
 
 Essa abordagem facilita manutenção, escalabilidade e leitura do código.
 
@@ -157,6 +160,7 @@ Antes de iniciar, certifique-se de ter instalado na sua máquina:
 - **Node.js** (versão 18 ou superior)
 - **pnpm**, **npm** ou **yarn**
 - **PostgreSQL** (ou conta no Neon)
+- **Conta no Stripe** (para configurar as chaves de API)
 
 ---
 
@@ -190,17 +194,21 @@ Crie um arquivo **.env** na raiz do projeto e configure:
 ```env
 DATABASE_URL="postgresql://usuario:senha@host:porta/banco"
 
-```
+# Chaves do Stripe
+STRIPE_SECRET_KEY="sua_chave_secreta"
+STRIPE_WEBHOOK_SECRET="seu_segredo_de_webhook"
+NEXT_PUBLIC_STRIPE_PUBLIC_KEY="sua_chave_publica"
 
-Caso utilize **Neon Serverless**, use a URL fornecida pela plataforma.
+```
 
 ---
 
-### 4️⃣ Rodar as migrações do banco de dados e gerar o prisma
+### 4️⃣ Rodar as migrações e gerar o cliente do banco de dados
 
 ```bash
 pnpx prisma migrate dev
 pnpx prisma generate
+
 ```
 
 Isso irá criar todas as tabelas necessárias no banco de dados.
@@ -232,10 +240,11 @@ Além de resolver um problema real do mercado, o sistema demonstra domínio de:
 
 * React e Next.js moderno
 * Server Actions
+* **Integração de pagamentos com Stripe e Webhooks**
 * ORM com Prisma
 * Modelagem de dados relacional
 * Validação robusta de formulários
 
-É uma aplicação preparada para evolução futura, como integração com pagamentos, painel administrativo e acompanhamento de pedidos em tempo real.
+É uma aplicação preparada para evolução contínua e pronta para o mercado.
 
 ```
