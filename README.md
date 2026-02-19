@@ -1,8 +1,15 @@
 # 🍽️ Sistema de Autoatendimento para Restaurantes (Self-Checkout)
 
+## 🌐 Deploy
+
+O projeto está online e o deploy pode ser acessado através do seguinte link:  
+👉 **[selfcheckout-app.vercel.app](https://selfcheckout-app.vercel.app)**
+
+---
+
 ## 📌 Visão Geral
 
-Este projeto é uma **aplicação web de autoatendimento (self-checkout) para restaurantes**, desenvolvida com o objetivo de permitir que clientes realizem pedidos de forma **autónoma**, sem a necessidade de interação direta com atendentes.
+Este projeto é uma **aplicação web de autoatendimento (self-checkout) para restaurantes**, desenvolvida com o objetivo de permitir que clientes realizem pedidos de forma **autônoma**, sem a necessidade de interação direta com atendentes.
 
 A solução funciona como um **cardápio digital interativo**, acessado por meio de um link único do restaurante, onde o cliente escolhe como deseja consumir, seleciona os produtos e finaliza o pedido diretamente pelo navegador.
 
@@ -107,10 +114,8 @@ O esquema da base de dados foi projetado de forma relacional para garantir integ
 - CPF
 - Método de consumo
 - Estado do pedido:
-  -
   - EM_PREPARAÇÃO
   - FINALIZADO
-
 - Valor total
 
 #### 🔗 OrderProduct
@@ -158,8 +163,9 @@ Antes de iniciar, certifique-se de ter instalado na sua máquina:
 ### 1️⃣ Clonar o repositório
 
 ```bash
-git clone https://github.com/seu-usuario/self-checkout.git
+git clone [https://github.com/seu-usuario/self-checkout.git](https://github.com/seu-usuario/self-checkout.git)
 cd self-checkout
+
 ```
 
 ---
@@ -172,6 +178,7 @@ pnpm install
 npm install
 # ou
 yarn install
+
 ```
 
 ---
@@ -182,6 +189,7 @@ Crie um arquivo **.env** na raiz do projeto e configure:
 
 ```env
 DATABASE_URL="postgresql://usuario:senha@host:porta/banco"
+
 ```
 
 Caso utilize **Neon Serverless**, use a URL fornecida pela plataforma.
@@ -192,6 +200,7 @@ Caso utilize **Neon Serverless**, use a URL fornecida pela plataforma.
 
 ```bash
 pnpx prisma migrate dev
+
 ```
 
 Isso irá criar todas as tabelas necessárias no banco de dados.
@@ -206,11 +215,12 @@ pnpm dev
 npm run dev
 # ou
 yarn dev
+
 ```
 
 O projeto estará disponível em:
 
-👉 **[http://localhost:3000](http://localhost:3000)**
+👉 **[http://localhost:3000](https://www.google.com/search?q=http://localhost:3000)**
 
 ---
 
@@ -220,10 +230,12 @@ Este projeto representa uma **solução completa de autoatendimento para restaur
 
 Além de resolver um problema real do mercado, o sistema demonstra domínio de:
 
-- React e Next.js moderno
-- Server Actions
-- ORM com Prisma
-- Modelagem de dados relacional
-- Validação robusta de formulários
+* React e Next.js moderno
+* Server Actions
+* ORM com Prisma
+* Modelagem de dados relacional
+* Validação robusta de formulários
 
 É uma aplicação preparada para evolução futura, como integração com pagamentos, painel administrativo e acompanhamento de pedidos em tempo real.
+
+```
