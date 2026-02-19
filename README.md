@@ -163,7 +163,7 @@ Antes de iniciar, certifique-se de ter instalado na sua máquina:
 ### 1️⃣ Clonar o repositório
 
 ```bash
-git clone [https://github.com/seu-usuario/self-checkout.git](https://github.com/seu-usuario/self-checkout.git)
+git clone https://github.com/me-lucas-al/self-checkout.git
 cd self-checkout
 
 ```
@@ -196,11 +196,11 @@ Caso utilize **Neon Serverless**, use a URL fornecida pela plataforma.
 
 ---
 
-### 4️⃣ Rodar as migrações do banco de dados
+### 4️⃣ Rodar as migrações do banco de dados e gerar o prisma
 
 ```bash
 pnpx prisma migrate dev
-
+pnpx prisma generate
 ```
 
 Isso irá criar todas as tabelas necessárias no banco de dados.
