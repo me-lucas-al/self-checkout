@@ -1,31 +1,35 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 80" width="100%" height="100%">
   <defs>
     <linearGradient id="logoBgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#E51821" />
-      <stop offset="100%" stop-color="#BA0C14" />
+      <stop offset="0%" stop-color="#1E1E24" />
+      <stop offset="100%" stop-color="#121215" />
     </linearGradient>
     <linearGradient id="logoGold" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#FFDE59" />
-      <stop offset="100%" stop-color="#FFBC0D" />
+      <stop offset="0%" stop-color="#FBBF24" />
+      <stop offset="100%" stop-color="#F59E0B" />
     </linearGradient>
     <filter id="logoShadow" x="-10%" y="-10%" width="120%" height="120%">
-      <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#000000" flood-opacity="0.25" />
+      <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#000000" flood-opacity="0.3" />
     </filter>
   </defs>
 
   <!-- Left Icon Emblem -->
   <g transform="translate(6, 6)">
-    <rect width="68" height="68" rx="18" fill="url(#logoBgGrad)" filter="url(#logoShadow)" />
-    <!-- M Arches -->
-    <path d="M 21 54 C 21 54 21 34 26 24 C 29 17 35 16 39 31 C 43 16 49 17 52 24 C 57 34 57 54 57 54 C 57 54 53 54 51 54 C 51 54 51 36 48 29 C 46 23 42 24 40 35 C 39.5 38 39.5 54 39.5 54 C 39.5 54 37 54 37 54 C 37 54 37 38 36.5 35 C 34.5 24 30.5 23 28.5 29 C 25.5 36 25.5 54 25.5 54 Z" fill="url(#logoGold)" />
+    <rect width="68" height="68" rx="18" fill="url(#logoBgGrad)" stroke="#F59E0B" stroke-width="2" filter="url(#logoShadow)" />
+    <!-- Cloche on Screen -->
+    <path d="M 23 44 C 23 30 45 30 45 44 Z" fill="url(#logoGold)" />
+    <circle cx="34" cy="27" r="3" fill="#FDE68A" />
+    <rect x="20" y="45" width="28" height="3.5" rx="1.75" fill="url(#logoGold)" />
+    <!-- Sparkle -->
+    <path d="M 46 22 L 48 26 L 52 28 L 48 30 L 46 34 L 44 30 L 40 28 L 44 26 Z" fill="#FDE68A" />
   </g>
 
   <!-- Brand Typography -->
   <g transform="translate(86, 20)">
-    <text x="0" y="24" font-family="system-ui, -apple-system, sans-serif" font-weight="900" font-size="24" fill="#18181B" letter-spacing="-0.5">McDonald's</text>
-    <rect x="0" y="32" width="98" height="18" rx="5" fill="#FEF08A" />
-    <text x="6" y="44" font-family="system-ui, -apple-system, sans-serif" font-weight="700" font-size="10.5" fill="#854D0E" letter-spacing="0.5">SELF CHECKOUT</text>
-    <circle cx="106" cy="41" r="3" fill="#16A34A" />
-    <text x="114" y="44" font-family="system-ui, -apple-system, sans-serif" font-weight="600" font-size="10.5" fill="#16A34A">TOTEM ATIVO</text>
+    <text x="0" y="24" font-family="system-ui, -apple-system, sans-serif" font-weight="900" font-size="24" fill="#18181B" letter-spacing="-0.5">Self Checkout</text>
+    <rect x="0" y="32" width="94" height="18" rx="5" fill="#FEF3C7" />
+    <text x="6" y="44" font-family="system-ui, -apple-system, sans-serif" font-weight="700" font-size="10.5" fill="#D97706" letter-spacing="0.5">TOTEM DIGITAL</text>
+    <circle cx="104" cy="41" r="3" fill="#16A34A" />
+    <text x="112" y="44" font-family="system-ui, -apple-system, sans-serif" font-weight="600" font-size="10.5" fill="#16A34A">ONLINE</text>
   </g>
 </svg>

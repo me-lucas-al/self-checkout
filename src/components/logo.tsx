@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { UtensilsCrossed } from "lucide-react";
 
 interface LogoProps {
   className?: string;
@@ -11,21 +12,21 @@ export function Logo({ className = "", size = "md", href = "/" }: LogoProps) {
     sm: {
       wrapper: "gap-2",
       icon: "h-8 w-8 rounded-lg",
-      mText: "text-base",
+      iconSvg: "h-4 w-4",
       title: "text-base font-bold",
       subtitle: "text-[10px]",
     },
     md: {
       wrapper: "gap-2.5",
       icon: "h-10 w-10 rounded-xl",
-      mText: "text-xl",
+      iconSvg: "h-5 w-5",
       title: "text-lg font-black tracking-tight",
       subtitle: "text-[11px]",
     },
     lg: {
       wrapper: "gap-3",
       icon: "h-12 w-12 rounded-2xl",
-      mText: "text-2xl",
+      iconSvg: "h-6 w-6",
       title: "text-xl font-black tracking-tight",
       subtitle: "text-xs",
     },
@@ -34,22 +35,17 @@ export function Logo({ className = "", size = "md", href = "/" }: LogoProps) {
   const content = (
     <div className={`inline-flex items-center ${sizeClasses.wrapper} ${className} group`}>
       <div
-        className={`relative flex ${sizeClasses.icon} items-center justify-center bg-gradient-to-br from-red-600 to-red-700 shadow-md shadow-red-500/20 ring-1 ring-white/20 transition-transform duration-300 group-hover:scale-105`}
+        className={`relative flex ${sizeClasses.icon} items-center justify-center bg-gradient-to-br from-neutral-900 via-neutral-800 to-neutral-950 text-amber-400 shadow-md shadow-amber-500/10 ring-1 ring-amber-400/30 transition-transform duration-300 group-hover:scale-105 group-hover:ring-amber-400/60`}
       >
-        <span
-          className={`font-black text-amber-400 font-serif leading-none select-none ${sizeClasses.mText}`}
-          style={{ fontFamily: "'Poppins', sans-serif", fontWeight: 900 }}
-        >
-          M
-        </span>
+        <UtensilsCrossed className={sizeClasses.iconSvg} />
       </div>
 
       <div className="flex flex-col">
         <span className={`leading-none text-neutral-900 ${sizeClasses.title}`}>
-          McDonald&apos;s
+          Self Checkout
         </span>
         <span className={`font-semibold tracking-wider uppercase text-amber-600 ${sizeClasses.subtitle}`}>
-          Self Checkout
+          Totem de Restaurantes
         </span>
       </div>
     </div>

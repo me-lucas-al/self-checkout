@@ -10,9 +10,9 @@ const poppins = Poppins({
   subsets: ['latin'],
 });
 export const metadata: Metadata = {
-  title: "McDonald's | Totem Self-Checkout",
+  title: "Self Checkout | Totem Digital para Restaurantes",
   description:
-    "Faça seu pedido rápido e fácil no totem digital do McDonald's. Escolha para comer no local ou levar com toda comodidade.",
+    "Plataforma de autoatendimento e cardápio digital para restaurantes. Faça seus pedidos sem filas, com rapidez, personalização e pagamento seguro.",
   icons: {
     icon: [
       { url: "/icon.svg", type: "image/svg+xml" },
