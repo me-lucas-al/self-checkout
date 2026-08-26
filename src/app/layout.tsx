@@ -10,8 +10,16 @@ const poppins = Poppins({
   subsets: ['latin'],
 });
 export const metadata: Metadata = {
-  title: 'Self Checkout',
-  description: 'App for restaurant self-checkout',
+  title: "McDonald's | Totem Self-Checkout",
+  description:
+    "Faça seu pedido rápido e fácil no totem digital do McDonald's. Escolha para comer no local ou levar com toda comodidade.",
+  icons: {
+    icon: [
+      { url: "/icon.svg", type: "image/svg+xml" },
+      { url: "/favicon.svg", type: "image/svg+xml" },
+    ],
+    apple: "/icon.svg",
+  },
 };
 
 export default function RootLayout({
@@ -20,7 +28,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="pt-BR">
       <body className={`${poppins.className} antialiased`}>
         <CartProvider>{children}</CartProvider>
         <Toaster/>
