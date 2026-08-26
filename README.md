@@ -3,7 +3,7 @@
 ## 🌐 Deploy
 
 O projeto está online e o deploy pode ser acessado através do seguinte link:  
-👉 **[selfcheckout-app.vercel.app](https://selfcheckout-app.vercel.app)**
+👉 **[selfcheckout.lucasalmeidasouza.com](https://selfcheckout.lucasalmeidasouza.com)**
 
 ---
 
